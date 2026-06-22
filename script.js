@@ -223,7 +223,7 @@ const ARTWORKS = [
 
 const CV_DATA = {
   personal: [
-    { label: 'Geboren', value: '17 maart 2001, Nijmegen' },
+    { label: 'Geboren', value: '17 maart 2001, Utrecht' },
     { label: 'Woont en werkt', value: 'Nijmegen, Nederland' },
   ],
   education: [
@@ -262,8 +262,8 @@ const CV_DATA = {
 const CONTACT_DATA = [
   {
     label: 'E-mail',
-    value: 'postvak.mjanssen@gmail.com',
-    href: 'mailto:postvak.mjanssen@gmail.com',
+    value: 'meermerelmailt@gmail.com',
+    href: 'mailto:meermerelmailt@gmail.com',
   },
   {
     label: 'Instagram',
