@@ -44,7 +44,7 @@ body {
   height: var(--nav-h);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 0 var(--pad-x);
   background: rgba(245, 244, 242, 0.93);
   backdrop-filter: blur(12px);
@@ -52,6 +52,15 @@ body {
   border-bottom: 1px solid var(--border);
   z-index: 200;
 }
+
+.nav-logo {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  font-weight: 300;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+.nav-logo:hover { color: var(--pink); }
 
 .nav-links {
   display: flex;
@@ -98,8 +107,6 @@ body {
   gap: 5px;
   width: 32px;
   height: 32px;
-  position: absolute;
-  right: var(--pad-x);
   z-index: 210;
 }
 
