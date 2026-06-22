@@ -39,6 +39,52 @@ const STATEMENT = `
 //   title, medium, dimensions, description, ratio (breedte/hoogte), images (array van bestandspaden), thumbnail
 // Afbeeldingen staan in de map /images/ — gebruik bijv. 'images/2024_werk01.jpg'
 const ARTWORKS = [
+  // ── 2026 ──────────────────────────────────────────────────
+  {
+    id: 'w2601',
+    year: 2026,
+    title: 'Kerst eten',
+    medium: 'Aquarel op papier',
+    dimensions: '30 × 40 cm',
+    description: '',
+    ratio: '3/4',
+    images: ['images/2026_01_a.png', 'images/2026_01_b.jpg'],
+    thumbnail: 'images/2026_01_a.png',
+  },
+  {
+    id: 'w2602',
+    year: 2026,
+    title: 'Lekker toetje',
+    medium: 'Olieverf op linnen',
+    dimensions: '80 × 100 cm',
+    description: 'Een libanese twist met mooie bloemetjes',
+    ratio: '4/5',
+    images: ['images/2026_04_a.jpg', 'images/2026_04_b.jpg',, 'images/2026_04_c.jpg'],
+    thumbnail: 'images/2026_04_a.jpg',
+  },
+  {
+    id: 'w2603',
+    year: 2026,
+    title: 'Amy is gek',
+    medium: 'Gemengde techniek op doek',
+    dimensions: '120 × 90 cm',
+    description: '',
+    ratio: '4/5',
+    images: ['images/2026_03_a.jpg'],
+    thumbnail: 'images/2026_03_a.jpg',
+  },
+  // ── 2025 ──────────────────────────────────────────────────
+  {
+    id: 'w2501',
+    year: 2025,
+    title: 'Vreemd?',
+    medium: 'Olieverf op linnen',
+    dimensions: '80 × 100 cm',
+    description: 'Vertel hier iets over het werk: het ontstaan, de context of de betekenis. Je kunt dit ook leeg laten.',
+    ratio: '4/5',
+    images: ['images/2025_12_a.jpg', 'images/2025_12_a.png'],
+    thumbnail: 'images/2025_12_a.jpg',
+  },
   // ── 2024 ──────────────────────────────────────────────────
   {
     id: 'w2401',
