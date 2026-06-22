@@ -1,0 +1,32 @@
+AFBEELDINGEN — meermerel.nl
+===========================
+
+Zet hier al jouw afbeeldingen in JPG, PNG of WebP-formaat.
+
+HERO (homepage)
+---------------
+images/hero.jpg  (of .png / .webp)
+  → Grote foto die de hele homepage vult. Formaat: liggend, minimaal 2000px breed.
+
+ARCHIEF — naamgeving per werk
+-------------------------------
+Gebruik de bestandsnamen die staan in script.js, per werk als 'images' array.
+De extensie mag .jpg, .png of .webp zijn — pas de naam in script.js aan zodat
+die overeenkomt met het bestand dat je hier plaatst.
+
+Voorbeelden:
+  images/2024_01_a.jpg   → werk 1 uit 2024, eerste foto (JPG)
+  images/2024_01_b.png   → werk 1 uit 2024, tweede foto (PNG)
+  images/2023_03_a.webp  → werk 3 uit 2023, eerste foto (WebP)
+  etc.
+
+TIPS
+----
+- JPG: goed voor foto's (kwaliteit 80–90%), kleine bestandsgrootte.
+- PNG: goed als je transparantie nodig hebt of verliesloze kwaliteit wilt.
+- WebP: kleinste bestandsgrootte, goede kwaliteit — aanbevolen als je wil optimaliseren.
+- Maximaal 1200–1600px breed is voldoende; grotere bestanden laden langzaam.
+- Zorg voor consistente beeldverhouding per reeks voor een strak archief.
+
+Pas na het toevoegen van afbeeldingen ook de teksten in script.js aan:
+title, medium, dimensions en description per werk.

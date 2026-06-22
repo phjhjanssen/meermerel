@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Merel Janssen, beeldend kunstenaar — Meer Merel">
+  <title>Meer Merel — Merel Janssen</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ── Navigatie ── -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Meer Merel</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#naam">Mijn naam</a></li>
+      <li><a href="#archief">Archief</a></li>
+      <li><a href="#cv">CV</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#agenda">Agenda</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section id="hero">
+    <div class="hero-bg" id="heroBg">
+      <span class="hero-placeholder-label">Afbeelding: images/hero.jpg</span>
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-name">Merel Janssen</h1>
+      <span class="hero-alias">Meer Merel</span>
+    </div>
+  </section>
+
+  <!-- ── Hoofdinhoud ── -->
+  <main>
+
+    <section id="naam" class="section">
+      <div class="container">
+        <h2 class="section-heading">Mijn naam</h2>
+        <div class="statement" id="statementText"></div>
+      </div>
+    </section>
+
+    <section id="archief" class="section">
+      <div class="container">
+        <h2 class="section-heading">Archief</h2>
+        <div id="archiveContent"></div>
+      </div>
+    </section>
+
+    <section id="cv" class="section">
+      <div class="container">
+        <h2 class="section-heading">CV</h2>
+        <div id="cvContent"></div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="section-heading">Contact</h2>
+        <div id="contactContent"></div>
+      </div>
+    </section>
+
+    <section id="agenda" class="section">
+      <div class="container">
+        <h2 class="section-heading">Agenda</h2>
+        <div id="agendaContent"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© <span id="footerYear"></span> Merel Janssen — Meer Merel</p>
+    </div>
+  </footer>
+
+  <!-- ── Lightbox ── -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Werkdetail">
+    <button class="lb-close" id="lbClose" aria-label="Sluiten">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Vorige afbeelding">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+    <button class="lb-arrow lb-next" id="lbNext" aria-label="Volgende afbeelding">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+    <div class="lb-inner">
+      <div class="lb-img-wrap">
+        <img id="lbImg" src="" alt="" class="lb-img">
+      </div>
+      <div class="lb-info">
+        <h3 id="lbTitle" class="lb-title"></h3>
+        <p id="lbMeta" class="lb-meta"></p>
+        <p id="lbDesc" class="lb-desc"></p>
+        <p id="lbCounter" class="lb-counter"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
