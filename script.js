@@ -12,19 +12,25 @@
 // ─────────────────────────────────────────────────────────────
 
 const STATEMENT = `
+  <p>Mijn werk is zich bewust van jou.</p>
   <p>
-    Vervang deze tekst door jouw eigen artist statement. Beschrijf wie je bent
-    als kunstenaar, wat je drijft en wat je werk betekent. Welke thema's,
-    materialen of methoden staan centraal in je praktijk?
+    In mijn praktijk onderzoek ik de grens tussen kijken en bekeken worden. De
+    interactie tussen publiek en werk zie ik als een tijdelijke ontmoeting, waarin de
+    toeschouwer onderdeel wordt van het werk zelf.
   </p>
   <p>
-    Een tweede alinea kan ingaan op je werkwijze, je inspiratiebronnen of de
-    manier waarop je je werk tot stand brengt. Hoe verhoudt het zich tot de
-    wereld om je heen? Wat wil je overdragen aan de kijker?
+    Die ontmoeting vertaalt zich in het beeld. Een vragende blik doorbreekt de vierde
+    wand van het schilderij en sculpturen houden de toeschouwer in hun vizier.
   </p>
   <p>
-    Een derde alinea kan gaan over je achtergrond, de plek die je werk inneemt
-    in de bredere kunstwereld, of een specifiek project waaraan je werkt.
+    Op het doek keren herkenbare figuren terug die verdwijnen in hun omgeving en
+    oplossen in de achtergrond. Ze bevinden zich tussen het tastbare en het
+    ongrijpbare, net zoals de materialen waaruit zij zijn opgebouwd.
+  </p>
+  <p>
+    Ledlicht en olieverf vormen een oppervlak dat zich telkens opnieuw verhoudt tot de
+    waarnemer. Wellicht beweegt het werk nog net, precies wanneer jouw ogen een
+    andere kant op dwalen.
   </p>
 `;
 
@@ -217,43 +223,52 @@ const ARTWORKS = [
 
 const CV_DATA = {
   personal: [
-    { label: 'Geboren', value: '19—, [geboortestad]' },
-    { label: 'Woont en werkt', value: 'Amsterdam, Nederland' },
+    { label: 'Geboren', value: '17 maart 2001, Nijmegen' },
+    { label: 'Woont en werkt', value: 'Nijmegen, Nederland' },
   ],
   education: [
-    ['20–20', 'Bachelor Beeldende Kunst, [Academienaam], [Stad]'],
-    ['20–20', 'Master Fine Art, [Academienaam], [Stad]'],
-  ],
-  soloExhibitions: [
-    ['2024', '"[Tentoonstellingstitel]", [Galerie of instelling], [Stad]'],
-    ['2023', '"[Tentoonstellingstitel]", [Galerie of instelling], [Stad]'],
-  ],
-  groupExhibitions: [
-    ['2024', '"[Tentoonstellingstitel]", [Galerie of instelling], [Stad]'],
-    ['2023', '"[Tentoonstellingstitel]", [Galerie of instelling], [Stad]'],
-    ['2022', '"[Tentoonstellingstitel]", [Galerie of instelling], [Stad]'],
-    ['2022', '"[Tentoonstellingstitel]", [Galerie of instelling], [Stad]'],
-    ['2021', '"[Tentoonstellingstitel]", [Galerie of instelling], [Stad]'],
+    ['2022–2026', 'BA Art & Research, St. Joost, \'s-Hertogenbosch'],
+    ['2024–2025', 'Minor Kunstgeschiedenis, Radboud Universiteit, Nijmegen'],
+    ['2020', 'Propedeuse Vaktherapie, HAN, Nijmegen'],
+    ['2018', 'Brede basisopleiding, HKU, Utrecht'],
   ],
   residencies: [
-    ['2023', '[Residentienaam], [Stad / Land]'],
-    ['2022', '[Residentienaam], [Stad / Land]'],
+    ['2026', 'Inhoud tussen haakjes, De Fabriek, Eindhoven'],
+    ['2025', 'Om water naar de zee te dragen, Viervaart, Zeeland'],
+    ['2024', 'On/af, Lokaal0.62, \'s-Hertogenbosch'],
   ],
-  awards: [
-    ['2022', '[Naam prijs of beurs], [Instelling]'],
+  exhibitions: [
+    ['2026', 'Inhoud tussen haakjes, afsluiting werkperiode De Fabriek'],
+    ['2026', 'De afstand met je handen meten, Graduation show St. Joost'],
+    ['2025', 'Om water naar de zee te dragen, afsluiting werkperiode Viervaart, St. Joost'],
+    ['2024', 'On/af, Lokaal0.62'],
+    ['2022', 'Groot, groter, grootst, tentoonstelling St. Joost'],
+  ],
+  collections: [
+    ['2025', 'Private collecties, Nederland'],
+    ['2019', 'Private collecties, Nederland'],
+  ],
+  publications: [
+    ['2022', 'Derop of Deronder, Boekscout'],
+  ],
+  internships: [
+    ['2025', 'MAKE, Eindhoven'],
+  ],
+  other: [
+    ['2025–2026', 'Vrijwilliger Platform P-OST'],
   ],
 };
 
 const CONTACT_DATA = [
   {
     label: 'E-mail',
-    value: 'info@meermerel.nl',
-    href: 'mailto:info@meermerel.nl',
+    value: 'postvak.mjanssen@gmail.com',
+    href: 'mailto:postvak.mjanssen@gmail.com',
   },
   {
     label: 'Instagram',
-    value: '@meermerel',
-    href: 'https://www.instagram.com/meermerel',
+    value: '@meer.merel_',
+    href: 'https://www.instagram.com/meer.merel_',
     external: true,
   },
   {
@@ -388,7 +403,7 @@ function renderArchive() {
 
 function renderCV() {
   const container = document.getElementById('cvContent');
-  const { personal, education, soloExhibitions, groupExhibitions, residencies, awards } = CV_DATA;
+  const { personal, education, residencies, exhibitions, collections, publications, internships, other } = CV_DATA;
 
   function table(rows) {
     return `<table class="cv-table">${rows.map(([year, desc]) => `
@@ -396,6 +411,14 @@ function renderCV() {
         <td>${escapeHtml(year)}</td>
         <td>${escapeHtml(desc)}</td>
       </tr>`).join('')}</table>`;
+  }
+
+  function block(title, rows) {
+    return `
+      <div class="cv-block">
+        <h3 class="cv-block-title">${title}</h3>
+        ${table(rows)}
+      </div>`;
   }
 
   const personalHtml = personal.map(row => `
@@ -411,28 +434,15 @@ function renderCV() {
           <h3 class="cv-block-title">Persoonsgegevens</h3>
           <div class="cv-personal">${personalHtml}</div>
         </div>
-        <div class="cv-block">
-          <h3 class="cv-block-title">Educatie</h3>
-          ${table(education)}
-        </div>
-        <div class="cv-block">
-          <h3 class="cv-block-title">Residenties</h3>
-          ${table(residencies)}
-        </div>
-        <div class="cv-block">
-          <h3 class="cv-block-title">Prijzen &amp; beurzen</h3>
-          ${table(awards)}
-        </div>
+        ${block('Opleidingen', education)}
+        ${block('Residenties', residencies)}
+        ${block('Collecties', collections)}
+        ${block('Publicaties', publications)}
+        ${block('Stage', internships)}
+        ${block('Overig', other)}
       </div>
       <div>
-        <div class="cv-block">
-          <h3 class="cv-block-title">Solotentoonstellingen</h3>
-          ${table(soloExhibitions)}
-        </div>
-        <div class="cv-block">
-          <h3 class="cv-block-title">Groepstentoonstellingen</h3>
-          ${table(groupExhibitions)}
-        </div>
+        ${block('Tentoonstellingen', exhibitions)}
       </div>
     </div>`;
 }
