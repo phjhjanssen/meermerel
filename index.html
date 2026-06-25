@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" id="htmlRoot">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,47 +11,49 @@
 </head>
 <body>
 
-  <!-- ── Navigatie ── -->
   <nav id="nav">
     <a href="#" class="nav-logo">Merel Janssen</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#naam">Meer Merel</a></li>
-      <li><a href="#archief">Archief</a></li>
+      <li><a href="#naam"    data-i18n="nav.about">Over mij</a></li>
+      <li><a href="#archief" data-i18n="nav.archive">Archief</a></li>
       <li><a href="#cv">CV</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="#agenda">Agenda</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+      <li><a href="#agenda"  data-i18n="nav.agenda">Agenda</a></li>
     </ul>
+    <div class="nav-actions">
+      <div class="lang-switch" id="langSwitch">
+        <button class="lang-btn active" data-lang="nl">NL</button>
+        <span class="lang-sep">/</span>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
-  <!-- ── Hero ── -->
+  <div class="nav-overlay" id="navOverlay"></div>
+
   <section id="hero">
-    <div class="hero-bg" id="heroBg">
-      <span class="hero-placeholder-label">Afbeelding: images/hero.jpg</span>
-    </div>
+    <div class="hero-bg" id="heroBg"></div>
     <div class="hero-content">
       <h1 class="hero-name">Merel Janssen</h1>
       <span class="hero-alias">Meer Merel</span>
     </div>
   </section>
 
-  <!-- ── Hoofdinhoud ── -->
   <main>
 
     <section id="naam" class="section">
       <div class="container">
-        <h2 class="section-heading">Meer Merel</h2>
+        <h2 class="section-heading" data-i18n="sections.about">Over mij</h2>
         <div class="statement" id="statementText"></div>
       </div>
     </section>
 
     <section id="archief" class="section">
       <div class="container">
-        <h2 class="section-heading">Archief</h2>
+        <h2 class="section-heading" data-i18n="sections.archive">Archief</h2>
         <div id="archiveContent"></div>
       </div>
     </section>
@@ -65,14 +67,14 @@
 
     <section id="contact" class="section">
       <div class="container">
-        <h2 class="section-heading">Contact</h2>
+        <h2 class="section-heading" data-i18n="sections.contact">Contact</h2>
         <div id="contactContent"></div>
       </div>
     </section>
 
     <section id="agenda" class="section">
       <div class="container">
-        <h2 class="section-heading">Agenda</h2>
+        <h2 class="section-heading" data-i18n="sections.agenda">Agenda</h2>
         <div id="agendaContent"></div>
       </div>
     </section>
@@ -85,19 +87,18 @@
     </div>
   </footer>
 
-  <!-- ── Lightbox ── -->
-  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Werkdetail">
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
     <button class="lb-close" id="lbClose" aria-label="Sluiten">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
       </svg>
     </button>
-    <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Vorige afbeelding">
+    <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Vorige">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="15 18 9 12 15 6"/>
       </svg>
     </button>
-    <button class="lb-arrow lb-next" id="lbNext" aria-label="Volgende afbeelding">
+    <button class="lb-arrow lb-next" id="lbNext" aria-label="Volgende">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="9 18 15 12 9 6"/>
       </svg>

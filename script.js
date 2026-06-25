@@ -1,43 +1,193 @@
 /* ============================================================
-   Meer Merel — Merel Janssen
-   script.js
+   Meer Merel — Merel Janssen  |  script.js
 
-   Alle inhoud staat in dit bestand als data. Pas de teksten
-   en bestandsnamen van afbeeldingen hier aan om de website
-   bij te werken. Afbeeldingen horen in de map /images/.
+   Inhoud aanpassen: zoek de secties ARTWORKS, CV_DATA,
+   CONTACT_DATA en AGENDA_DATA hieronder.
+   Afbeeldingen horen in de map /images/.
    ============================================================ */
 
 // ─────────────────────────────────────────────────────────────
-// INHOUD — pas dit aan met jouw eigen teksten en afbeeldingen
+// VERTALINGEN
 // ─────────────────────────────────────────────────────────────
 
-const STATEMENT = `
-  <p>Mijn werk is zich bewust van jou.</p>
-  <p>
-    In mijn praktijk onderzoek ik de grens tussen kijken en bekeken worden. De
-    interactie tussen publiek en werk zie ik als een tijdelijke ontmoeting, waarin de
-    toeschouwer onderdeel wordt van het werk zelf.
-  </p>
-  <p>
-    Die ontmoeting vertaalt zich in het beeld. Een vragende blik doorbreekt de vierde
-    wand van het schilderij en sculpturen houden de toeschouwer in hun vizier.
-  </p>
-  <p>
-    Op het doek keren herkenbare figuren terug die verdwijnen in hun omgeving en
-    oplossen in de achtergrond. Ze bevinden zich tussen het tastbare en het
-    ongrijpbare, net zoals de materialen waaruit zij zijn opgebouwd.
-  </p>
-  <p>
-    Ledlicht en olieverf vormen een oppervlak dat zich telkens opnieuw verhoudt tot de
-    waarnemer. Wellicht beweegt het werk nog net, precies wanneer jouw ogen een
-    andere kant op dwalen.
-  </p>
-`;
+const i18n = {
+  nl: {
+    nav: {
+      about:   'Over mij',
+      archive: 'Archief',
+      contact: 'Contact',
+      agenda:  'Agenda',
+    },
+    sections: {
+      about:   'Over mij',
+      archive: 'Archief',
+      contact: 'Contact',
+      agenda:  'Agenda',
+    },
+    cv: {
+      personal:     'Persoonsgegevens',
+      education:    'Opleidingen',
+      residencies:  'Residenties',
+      exhibitions:  'Tentoonstellingen',
+      collections:  'Collecties',
+      publications: 'Publicaties',
+      internships:  'Stage',
+      other:        'Overig',
+      born:         'Geboren',
+      lives:        'Woont en werkt',
+    },
+    contact: {
+      email:    'E-mail',
+      instagram:'Instagram',
+      phone:    'Telefoon',
+    },
+    agenda: {
+      current:   'Lopend',
+      upcoming:  'Aankomend',
+      nowShowing:'Nu te zien',
+      badge:     'Aankomend',
+      empty:     'Binnenkort meer informatie.',
+    },
+    statement: `
+      <p>Mijn werk is zich bewust van jou.</p>
+      <p>
+        In mijn praktijk onderzoek ik de grens tussen kijken en bekeken worden. De
+        interactie tussen publiek en werk zie ik als een tijdelijke ontmoeting, waarin de
+        toeschouwer onderdeel wordt van het werk zelf.
+      </p>
+      <p>
+        Die ontmoeting vertaalt zich in het beeld. Een vragende blik doorbreekt de vierde
+        wand van het schilderij en sculpturen houden de toeschouwer in hun vizier.
+      </p>
+      <p>
+        Op het doek keren herkenbare figuren terug die verdwijnen in hun omgeving en
+        oplossen in de achtergrond. Ze bevinden zich tussen het tastbare en het
+        ongrijpbare, net zoals de materialen waaruit zij zijn opgebouwd.
+      </p>
+      <p>
+        Ledlicht en olieverf vormen een oppervlak dat zich telkens opnieuw verhoudt tot de
+        waarnemer. Wellicht beweegt het werk nog net, precies wanneer jouw ogen een
+        andere kant op dwalen.
+      </p>
+    `,
+  },
 
-// Werken in het archief — meest recent bovenaan, oudste onderaan.
-// Voeg voor elk werk een object toe met:
-//   title, medium, dimensions, description, ratio (breedte/hoogte), images (array van bestandspaden), thumbnail
-// Afbeeldingen staan in de map /images/ — gebruik bijv. 'images/2024_werk01.jpg'
+  en: {
+    nav: {
+      about:   'About',
+      archive: 'Archive',
+      contact: 'Contact',
+      agenda:  'Events',
+    },
+    sections: {
+      about:   'About',
+      archive: 'Archive',
+      contact: 'Contact',
+      agenda:  'Events',
+    },
+    cv: {
+      personal:     'Personal',
+      education:    'Education',
+      residencies:  'Residencies',
+      exhibitions:  'Exhibitions',
+      collections:  'Collections',
+      publications: 'Publications',
+      internships:  'Internship',
+      other:        'Other',
+      born:         'Born',
+      lives:        'Lives and works',
+    },
+    contact: {
+      email:    'E-mail',
+      instagram:'Instagram',
+      phone:    'Phone',
+    },
+    agenda: {
+      current:   'Current',
+      upcoming:  'Upcoming',
+      nowShowing:'On view',
+      badge:     'Upcoming',
+      empty:     'More information coming soon.',
+    },
+    statement: `
+      <p>My work is aware of you.</p>
+      <p>
+        In my practice, I explore the boundary between looking and being looked at.
+        I see the interaction between audience and work as a temporary encounter,
+        in which the viewer becomes part of the work itself.
+      </p>
+      <p>
+        This encounter translates into the image. A questioning gaze breaks through
+        the fourth wall of the painting, and sculptures keep the viewer in their sights.
+      </p>
+      <p>
+        On the canvas, recognisable figures return, disappearing into their surroundings
+        and dissolving into the background. They exist between the tangible and the
+        intangible, just like the materials from which they are made.
+      </p>
+      <p>
+        LED light and oil paint form a surface that relates to the viewer anew each time.
+        Perhaps the work moves, just barely, precisely when your eyes wander elsewhere.
+      </p>
+    `,
+  },
+};
+
+// Actieve taal — opgeslagen in localStorage
+const LANG = { current: localStorage.getItem('mm-lang') || 'nl' };
+
+function t(path) {
+  return path.split('.').reduce((o, k) => o?.[k], i18n[LANG.current]) ?? path;
+}
+
+function setLang(lang) {
+  LANG.current = lang;
+  localStorage.setItem('mm-lang', lang);
+  document.getElementById('htmlRoot').setAttribute('lang', lang);
+
+  // Taalknopjes bijwerken
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+
+  // data-i18n elementen bijwerken
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = t(el.dataset.i18n);
+  });
+
+  // Herrender inhoud
+  const scrollY = window.scrollY;
+  renderStatement();
+  renderCV();
+  renderContact();
+  renderAgenda();
+  window.scrollTo(0, scrollY);
+}
+
+// ─────────────────────────────────────────────────────────────
+// HERO AFBEELDINGEN
+// ─────────────────────────────────────────────────────────────
+// Voeg meer afbeeldingen toe om te laten rouleren.
+// Desktop: liggende foto's — Mobiel: staande foto's.
+// Gebruik images/hero_mobile.jpg als je een aparte mobiele foto hebt;
+// ontbreekt die, dan valt de site terug op de desktopfoto.
+
+const HERO_IMAGES = {
+  desktop: [
+    'images/hero.jpg',
+    // 'images/hero2.jpg',
+    // 'images/hero3.jpg',
+  ],
+  mobile: [
+    'images/hero_mobile.jpg',  // optioneel — valt terug op hero.jpg
+    // 'images/hero_mobile2.jpg',
+  ],
+};
+
+// ─────────────────────────────────────────────────────────────
+// WERKEN IN HET ARCHIEF
+// ─────────────────────────────────────────────────────────────
+
 const ARTWORKS = [
   // ── 2026 ──────────────────────────────────────────────────
   {
@@ -59,7 +209,7 @@ const ARTWORKS = [
     dimensions: '80 × 100 cm',
     description: 'Een libanese twist met mooie bloemetjes',
     ratio: '4/5',
-    images: ['images/2026_04_a.jpg', 'images/2026_04_b.jpg',, 'images/2026_04_c.jpg'],
+    images: ['images/2026_04_a.jpg', 'images/2026_04_b.jpg', 'images/2026_04_c.jpg'],
     thumbnail: 'images/2026_04_a.jpg',
   },
   {
@@ -267,16 +417,20 @@ const ARTWORKS = [
   },
 ];
 
+// ─────────────────────────────────────────────────────────────
+// CV
+// ─────────────────────────────────────────────────────────────
+
 const CV_DATA = {
   personal: [
-    { label: 'Geboren', value: '17 maart 2001, Utrecht' },
-    { label: 'Woont en werkt', value: 'Nijmegen, Nederland' },
+    { key: 'born',  value: '17 maart 2001, Utrecht' },
+    { key: 'lives', value: 'Nijmegen, Nederland' },
   ],
   education: [
     ['2022–2026', 'BA Art & Research, St. Joost, \'s-Hertogenbosch'],
     ['2024–2025', 'Minor Kunstgeschiedenis, Radboud Universiteit, Nijmegen'],
-    ['2020', 'Propedeuse Vaktherapie, HAN, Nijmegen'],
-    ['2018', 'Brede basisopleiding, HKU, Utrecht'],
+    ['2020',      'Propedeuse Vaktherapie, HAN, Nijmegen'],
+    ['2018',      'Brede basisopleiding, HKU, Utrecht'],
   ],
   residencies: [
     ['2026', 'Inhoud tussen haakjes, De Fabriek, Eindhoven'],
@@ -305,46 +459,41 @@ const CV_DATA = {
   ],
 };
 
+// ─────────────────────────────────────────────────────────────
+// CONTACT
+// ─────────────────────────────────────────────────────────────
+
 const CONTACT_DATA = [
-  {
-    label: 'E-mail',
-    value: 'meermerelmailt@gmail.com',
-    href: 'mailto:meermerelmailt@gmail.com',
-  },
-  {
-    label: 'Instagram',
-    value: '@meer.merel_',
-    href: 'https://www.instagram.com/meer.merel_',
-    external: true,
-  },
-  {
-    label: 'Telefoon',
-    value: '+31 (0)6 — — — — — —',
-    href: null,
-  },
+  { key: 'email',     value: 'meermerelmailt@gmail.com', href: 'mailto:meermerelmailt@gmail.com' },
+  { key: 'instagram', value: '@meer.merel_', href: 'https://www.instagram.com/meer.merel_', external: true },
+  { key: 'phone',     value: '+31 (0)6 — — — — — —', href: null },
 ];
+
+// ─────────────────────────────────────────────────────────────
+// AGENDA
+// ─────────────────────────────────────────────────────────────
 
 const AGENDA_DATA = {
   current: [
     {
-      title: '"[Naam tentoonstelling]"',
+      title:    '"[Naam tentoonstelling]"',
       location: '[Galerie / Museum], [Stad]',
-      date: 't/m [maand] 2025',
-      status: 'lopend',
+      date:     't/m [maand] 2025',
+      status:   'lopend',
     },
   ],
   upcoming: [
     {
-      title: '"[Naam tentoonstelling]"',
+      title:    '"[Naam tentoonstelling]"',
       location: '[Galerie / Museum], [Stad]',
-      date: '[maand] 2025',
-      status: 'aankomend',
+      date:     '[maand] 2025',
+      status:   'aankomend',
     },
     {
-      title: '"[Naam tentoonstelling]"',
+      title:    '"[Naam tentoonstelling]"',
       location: '[Galerie / Museum], [Stad]',
-      date: '[maand] 2026',
-      status: 'aankomend',
+      date:     '[maand] 2026',
+      status:   'aankomend',
     },
   ],
 };
@@ -353,7 +502,6 @@ const AGENDA_DATA = {
 // HULPFUNCTIES
 // ─────────────────────────────────────────────────────────────
 
-// Maakt een SVG-placeholder als een afbeelding nog niet beschikbaar is
 function svgPlaceholder(ratio, label) {
   const parts = ratio.split('/');
   const w = 400;
@@ -370,19 +518,17 @@ function svgPlaceholder(ratio, label) {
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
 }
 
-// Controleert of een afbeeldingspad een echte afbeelding is (begint met 'images/')
 function isRealImage(src) {
   return src && !src.startsWith('data:');
 }
 
-// Laadt een afbeelding; bij fout wordt een placeholder getoond
 function loadImage(el, src, ratio, label) {
   if (!isRealImage(src)) {
     el.style.backgroundImage = 'url(' + svgPlaceholder(ratio, label) + ')';
     return;
   }
   const img = new Image();
-  img.onload = () => { el.style.backgroundImage = 'url(' + src + ')'; };
+  img.onload  = () => { el.style.backgroundImage = 'url(' + src + ')'; };
   img.onerror = () => { el.style.backgroundImage = 'url(' + svgPlaceholder(ratio, label) + ')'; };
   img.src = src;
 }
@@ -396,12 +542,16 @@ function escapeHtml(str) {
 }
 
 // ─────────────────────────────────────────────────────────────
-// RENDER FUNCTIES
+// RENDER: STATEMENT
 // ─────────────────────────────────────────────────────────────
 
 function renderStatement() {
-  document.getElementById('statementText').innerHTML = STATEMENT;
+  document.getElementById('statementText').innerHTML = t('statement');
 }
+
+// ─────────────────────────────────────────────────────────────
+// RENDER: ARCHIEF
+// ─────────────────────────────────────────────────────────────
 
 function renderArchive() {
   const container = document.getElementById('archiveContent');
@@ -409,22 +559,31 @@ function renderArchive() {
 
   container.innerHTML = years.map(year => {
     const works = ARTWORKS.filter(w => w.year === year);
-    const thumbs = works.map(work => `
-      <div class="archive-thumb"
-           data-work-id="${escapeHtml(work.id)}"
-           role="button"
-           tabindex="0"
-           aria-label="Bekijk ${escapeHtml(work.title)}">
-        <div class="archive-thumb-img"
-             data-src="${escapeHtml(work.thumbnail)}"
-             data-ratio="${work.ratio}"
-             data-label="${escapeHtml(work.title)}"
-             style="aspect-ratio:${work.ratio}"></div>
-        <div class="archive-thumb-caption">
-          <span class="archive-thumb-title">${escapeHtml(work.title)}</span>
-          <span class="archive-thumb-meta">${escapeHtml(work.medium)}</span>
-        </div>
-      </div>`).join('');
+
+    const thumbs = works.map(work => {
+      const hasMult = work.images.length > 1;
+      const dots = hasMult
+        ? `<div class="archive-thumb-dots">${work.images.map((_, i) =>
+            `<span class="archive-dot${i === 0 ? ' active' : ''}"></span>`).join('')}</div>`
+        : '';
+
+      return `
+        <div class="archive-thumb"
+             data-work-id="${escapeHtml(work.id)}"
+             role="button" tabindex="0"
+             aria-label="${escapeHtml(work.title)}">
+          <div class="archive-thumb-img"
+               data-src="${escapeHtml(work.thumbnail)}"
+               data-ratio="${work.ratio}"
+               data-label="${escapeHtml(work.title)}"
+               style="aspect-ratio:${work.ratio}"></div>
+          ${dots}
+          <div class="archive-thumb-caption">
+            <span class="archive-thumb-title">${escapeHtml(work.title)}</span>
+            <span class="archive-thumb-meta">${escapeHtml(work.medium)}</span>
+          </div>
+        </div>`;
+    }).join('');
 
     return `
       <div class="archive-year">
@@ -433,13 +592,44 @@ function renderArchive() {
       </div>`;
   }).join('');
 
-  // Laad placeholder-afbeeldingen en voeg click-handlers toe
-  container.querySelectorAll('.archive-thumb-img').forEach(el => {
-    loadImage(el, el.dataset.src, el.dataset.ratio, el.dataset.label);
-  });
-
+  // Afbeeldingen laden en interactie koppelen
   container.querySelectorAll('.archive-thumb').forEach(el => {
-    const open = () => openLightbox(el.dataset.workId);
+    const work = ARTWORKS.find(w => w.id === el.dataset.workId);
+    if (!work) return;
+    const imgEl = el.querySelector('.archive-thumb-img');
+    const dotsEls = el.querySelectorAll('.archive-dot');
+
+    // Thumbnail laden
+    loadImage(imgEl, work.images[0] || work.thumbnail, work.ratio, work.title);
+
+    // Sneak peek: blader door foto's na 500ms hoveren
+    let hoverDelay = null;
+    let hoverInterval = null;
+
+    function startCycle() {
+      if (work.images.length <= 1) return;
+      let idx = 1;
+      hoverInterval = setInterval(() => {
+        loadImage(imgEl, work.images[idx % work.images.length], work.ratio, work.title);
+        dotsEls.forEach((d, i) => d.classList.toggle('active', i === idx % work.images.length));
+        idx++;
+      }, 900);
+    }
+
+    function stopCycle() {
+      clearTimeout(hoverDelay);
+      clearInterval(hoverInterval);
+      loadImage(imgEl, work.images[0] || work.thumbnail, work.ratio, work.title);
+      dotsEls.forEach((d, i) => d.classList.toggle('active', i === 0));
+    }
+
+    el.addEventListener('mouseenter', () => {
+      hoverDelay = setTimeout(startCycle, 500);
+    });
+    el.addEventListener('mouseleave', stopCycle);
+
+    // Lightbox openen
+    const open = () => openLightbox(work.id);
     el.addEventListener('click', open);
     el.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
@@ -447,9 +637,14 @@ function renderArchive() {
   });
 }
 
+// ─────────────────────────────────────────────────────────────
+// RENDER: CV
+// ─────────────────────────────────────────────────────────────
+
 function renderCV() {
   const container = document.getElementById('cvContent');
-  const { personal, education, residencies, exhibitions, collections, publications, internships, other } = CV_DATA;
+  const { personal, education, residencies, exhibitions,
+          collections, publications, internships, other } = CV_DATA;
 
   function table(rows) {
     return `<table class="cv-table">${rows.map(([year, desc]) => `
@@ -459,17 +654,17 @@ function renderCV() {
       </tr>`).join('')}</table>`;
   }
 
-  function block(title, rows) {
+  function block(titleKey, rows) {
     return `
       <div class="cv-block">
-        <h3 class="cv-block-title">${title}</h3>
+        <h3 class="cv-block-title">${t('cv.' + titleKey)}</h3>
         ${table(rows)}
       </div>`;
   }
 
   const personalHtml = personal.map(row => `
     <div class="cv-personal-row">
-      <span class="cv-personal-label">${escapeHtml(row.label)}</span>
+      <span class="cv-personal-label">${t('cv.' + row.key)}</span>
       <span>${escapeHtml(row.value)}</span>
     </div>`).join('');
 
@@ -477,38 +672,48 @@ function renderCV() {
     <div class="cv-grid">
       <div>
         <div class="cv-block">
-          <h3 class="cv-block-title">Persoonsgegevens</h3>
+          <h3 class="cv-block-title">${t('cv.personal')}</h3>
           <div class="cv-personal">${personalHtml}</div>
         </div>
-        ${block('Opleidingen', education)}
-        ${block('Residenties', residencies)}
-        ${block('Collecties', collections)}
-        ${block('Publicaties', publications)}
-        ${block('Stage', internships)}
-        ${block('Overig', other)}
+        ${block('education',    education)}
+        ${block('residencies',  residencies)}
+        ${block('collections',  collections)}
+        ${block('publications', publications)}
+        ${block('internships',  internships)}
+        ${block('other',        other)}
       </div>
       <div>
-        ${block('Tentoonstellingen', exhibitions)}
+        ${block('exhibitions', exhibitions)}
       </div>
     </div>`;
 }
+
+// ─────────────────────────────────────────────────────────────
+// RENDER: CONTACT
+// ─────────────────────────────────────────────────────────────
 
 function renderContact() {
   const container = document.getElementById('contactContent');
   container.innerHTML = `
     <ul class="contact-list">
       ${CONTACT_DATA.map(item => {
+        const label = t('contact.' + item.key);
         const val = item.href
-          ? `<a href="${escapeHtml(item.href)}"${item.external ? ' target="_blank" rel="noopener noreferrer"' : ''}>${escapeHtml(item.value)}</a>`
+          ? `<a href="${escapeHtml(item.href)}"${item.external
+              ? ' target="_blank" rel="noopener noreferrer"' : ''}>${escapeHtml(item.value)}</a>`
           : escapeHtml(item.value);
         return `
           <li class="contact-item">
-            <span class="contact-label">${escapeHtml(item.label)}</span>
+            <span class="contact-label">${label}</span>
             <span class="contact-value">${val}</span>
           </li>`;
       }).join('')}
     </ul>`;
 }
+
+// ─────────────────────────────────────────────────────────────
+// RENDER: AGENDA
+// ─────────────────────────────────────────────────────────────
 
 function renderAgenda() {
   const container = document.getElementById('agendaContent');
@@ -516,7 +721,7 @@ function renderAgenda() {
 
   function renderItems(items) {
     if (!items.length) {
-      return '<p class="agenda-empty">Binnenkort meer informatie.</p>';
+      return `<p class="agenda-empty">${t('agenda.empty')}</p>`;
     }
     return items.map(item => `
       <div class="agenda-item">
@@ -525,7 +730,7 @@ function renderAgenda() {
           <p class="agenda-title">${escapeHtml(item.title)}</p>
           <p class="agenda-location">${escapeHtml(item.location)}</p>
           <span class="agenda-badge ${item.status}">
-            ${item.status === 'lopend' ? 'Nu te zien' : 'Aankomend'}
+            ${item.status === 'lopend' ? t('agenda.nowShowing') : t('agenda.badge')}
           </span>
         </div>
       </div>`).join('');
@@ -534,29 +739,72 @@ function renderAgenda() {
   container.innerHTML = `
     <div class="agenda-col">
       <div class="agenda-group">
-        <h3 class="agenda-group-title">Lopend</h3>
+        <h3 class="agenda-group-title">${t('agenda.current')}</h3>
         ${renderItems(current)}
       </div>
       <div class="agenda-group">
-        <h3 class="agenda-group-title">Aankomend</h3>
+        <h3 class="agenda-group-title">${t('agenda.upcoming')}</h3>
         ${renderItems(upcoming)}
       </div>
     </div>`;
 }
 
 // ─────────────────────────────────────────────────────────────
-// HERO
+// HERO — rotatie + desktop/mobiel
 // ─────────────────────────────────────────────────────────────
 
 function initHero() {
   const heroBg = document.getElementById('heroBg');
-  const heroImg = new Image();
-  heroImg.onload = () => {
-    heroBg.style.backgroundImage = 'url(images/hero.jpg)';
-    heroBg.querySelector('.hero-placeholder-label').style.display = 'none';
-  };
-  // Bij ontbreken van hero.jpg blijft de placeholder zichtbaar
-  heroImg.src = 'images/hero.jpg';
+  const isMobile = () => window.innerWidth <= 600;
+
+  function getSources() {
+    if (isMobile() && HERO_IMAGES.mobile.length) {
+      return [...HERO_IMAGES.mobile, ...HERO_IMAGES.desktop];
+    }
+    return HERO_IMAGES.desktop;
+  }
+
+  // Laad bronnen en maak slides
+  const sources = getSources();
+  const loaded = [];
+
+  let placeholder = document.createElement('div');
+  placeholder.className = 'hero-placeholder-label';
+  placeholder.textContent = 'Afbeelding: images/hero.jpg';
+  heroBg.appendChild(placeholder);
+
+  function tryLoad(src) {
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload  = () => resolve(src);
+      img.onerror = () => resolve(null);
+      img.src = src;
+    });
+  }
+
+  Promise.all(sources.map(tryLoad)).then(results => {
+    results.filter(Boolean).forEach((src, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'hero-slide' + (i === 0 ? ' active' : '');
+      slide.style.backgroundImage = 'url(' + src + ')';
+      heroBg.appendChild(slide);
+      loaded.push(slide);
+    });
+
+    if (loaded.length) {
+      placeholder.style.display = 'none';
+    }
+
+    // Rotatie starten als er meer dan één afbeelding is
+    if (loaded.length > 1) {
+      let current = 0;
+      setInterval(() => {
+        loaded[current].classList.remove('active');
+        current = (current + 1) % loaded.length;
+        loaded[current].classList.add('active');
+      }, 5000);
+    }
+  });
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -592,15 +840,12 @@ function updateLightbox() {
   const src = lbWork.images[lbIndex];
   const img = document.getElementById('lbImg');
 
-  // Toon placeholder totdat de echte afbeelding geladen is
+  img.src = svgPlaceholder(lbWork.ratio, lbWork.title);
   if (isRealImage(src)) {
-    img.src = svgPlaceholder(lbWork.ratio, lbWork.title);
     const real = new Image();
-    real.onload = () => { img.src = src; };
-    real.onerror = () => { img.src = svgPlaceholder(lbWork.ratio, lbWork.title); };
+    real.onload  = () => { img.src = src; };
+    real.onerror = () => {};
     real.src = src;
-  } else {
-    img.src = svgPlaceholder(lbWork.ratio, lbWork.title);
   }
 
   img.alt = lbWork.title;
@@ -613,42 +858,34 @@ function updateLightbox() {
 
   document.getElementById('lbPrev').classList.toggle('hidden', lbIndex === 0);
   document.getElementById('lbNext').classList.toggle('hidden', lbIndex >= lbWork.images.length - 1);
-
-  // Scroll lightbox terug naar top bij nieuwe afbeelding
   document.getElementById('lightbox').scrollTop = 0;
 }
 
 function lbPrevImg() { if (lbIndex > 0) { lbIndex--; updateLightbox(); } }
 function lbNextImg() { if (lbWork && lbIndex < lbWork.images.length - 1) { lbIndex++; updateLightbox(); } }
 
-// Knoppen
 document.getElementById('lbClose').addEventListener('click', closeLightbox);
 document.getElementById('lbPrev').addEventListener('click', lbPrevImg);
 document.getElementById('lbNext').addEventListener('click', lbNextImg);
 
-// Klik buiten het werk sluit lightbox
 document.getElementById('lightbox').addEventListener('click', e => {
   if (e.target === e.currentTarget) closeLightbox();
 });
 
-// Toetsenbordbediening
 document.addEventListener('keydown', e => {
   if (!document.getElementById('lightbox').classList.contains('open')) return;
-  if (e.key === 'Escape')      closeLightbox();
-  if (e.key === 'ArrowLeft')   lbPrevImg();
-  if (e.key === 'ArrowRight')  lbNextImg();
+  if (e.key === 'Escape')     closeLightbox();
+  if (e.key === 'ArrowLeft')  lbPrevImg();
+  if (e.key === 'ArrowRight') lbNextImg();
 });
 
-// Touch-swipe voor mobiel
 document.getElementById('lightbox').addEventListener('touchstart', e => {
   lbTouchStartX = e.touches[0].clientX;
 }, { passive: true });
 
 document.getElementById('lightbox').addEventListener('touchend', e => {
   const diff = lbTouchStartX - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 50) {
-    if (diff > 0) lbNextImg(); else lbPrevImg();
-  }
+  if (Math.abs(diff) > 50) { if (diff > 0) lbNextImg(); else lbPrevImg(); }
 }, { passive: true });
 
 // ─────────────────────────────────────────────────────────────
@@ -656,30 +893,39 @@ document.getElementById('lightbox').addEventListener('touchend', e => {
 // ─────────────────────────────────────────────────────────────
 
 const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('navLinks');
+const navLinks  = document.getElementById('navLinks');
+const navOverlay = document.getElementById('navOverlay');
 
-navToggle.addEventListener('click', () => {
-  const isOpen = navLinks.classList.toggle('open');
-  navToggle.classList.toggle('open', isOpen);
-  navToggle.setAttribute('aria-expanded', String(isOpen));
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
+function openDrawer() {
+  navLinks.classList.add('open');
+  navToggle.classList.add('open');
+  navOverlay.classList.add('open');
+  navToggle.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
 
-// Sluit mobiel menu na klikken op een link
+function closeDrawer() {
+  navLinks.classList.remove('open');
+  navToggle.classList.remove('open');
+  navOverlay.classList.remove('open');
+  navToggle.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
+navToggle.addEventListener('click', () =>
+  navLinks.classList.contains('open') ? closeDrawer() : openDrawer()
+);
+navOverlay.addEventListener('click', closeDrawer);
+
 navLinks.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    navToggle.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  });
+  a.addEventListener('click', closeDrawer);
 });
 
-// Scroll-spy: markeer het actieve nav-item
-const sections = document.querySelectorAll('main section[id]');
+// Scroll-spy
+const sections   = document.querySelectorAll('main section[id]');
 const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
 
-const scrollObserver = new IntersectionObserver(entries => {
+new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       navAnchors.forEach(a => {
@@ -687,9 +933,27 @@ const scrollObserver = new IntersectionObserver(entries => {
       });
     }
   });
-}, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+}, { rootMargin: '-15% 0px -75% 0px' }).observe
+  ? sections.forEach(s => {
+      new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navAnchors.forEach(a => {
+              a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+            });
+          }
+        });
+      }, { rootMargin: '-15% 0px -75% 0px' }).observe(s);
+    })
+  : null;
 
-sections.forEach(s => scrollObserver.observe(s));
+// Taalschakelaar
+document.getElementById('langSwitch').addEventListener('click', e => {
+  const btn = e.target.closest('.lang-btn');
+  if (btn && btn.dataset.lang !== LANG.current) {
+    setLang(btn.dataset.lang);
+  }
+});
 
 // ─────────────────────────────────────────────────────────────
 // INITIALISATIE
@@ -697,9 +961,8 @@ sections.forEach(s => scrollObserver.observe(s));
 
 document.getElementById('footerYear').textContent = new Date().getFullYear();
 
-renderStatement();
+// Taal instellen op opgeslagen voorkeur
+setLang(LANG.current);
+
 renderArchive();
-renderCV();
-renderContact();
-renderAgenda();
 initHero();
