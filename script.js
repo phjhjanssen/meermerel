@@ -234,13 +234,13 @@ const ARTWORKS = [
   // ── 2024 ──────────────────────────────────────────────────
   {
     id: 'w2401',
-    year: 2024,
-    title: 'Zonder titel I',
-    medium: 'Olieverf op linnen',
-    dimensions: '80 × 100 cm',
-    description: 'Vertel hier iets over het werk: het ontstaan, de context of de betekenis. Je kunt dit ook leeg laten.',
+    year: 2025,
+    title: 'Pak liever een emmer',
+    medium: 'Olieverf op doek',
+    dimensions: '128 x 90 cm',
+    description: '',
     ratio: '4/5',
-    images: ['images/2024_01_a.png', 'images/2024_01_b.jpg'],
+    images: ['images/2025_pak liever een emmer_a.jpg'],
     thumbnail: 'images/2024_01_a.png',
   },
   {
