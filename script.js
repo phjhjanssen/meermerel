@@ -231,7 +231,7 @@ const ARTWORKS = [
     description: '',
     ratio: '4/5',
     images: ['images/2025_pak liever een emmer_a.jpg'],
-    thumbnail: 'images/2025_pak liever een emmer_thumb.jpg',
+    thumbnail: 'images/2025_pak liever een emmer_thumb.png',
   },
   {
     id: 'w2402',
