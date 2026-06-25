@@ -676,14 +676,12 @@ function renderCV() {
           <div class="cv-personal">${personalHtml}</div>
         </div>
         ${block('education',    education)}
+        ${block('exhibitions',  exhibitions)}
         ${block('residencies',  residencies)}
         ${block('collections',  collections)}
         ${block('publications', publications)}
         ${block('internships',  internships)}
         ${block('other',        other)}
-      </div>
-      <div>
-        ${block('exhibitions', exhibitions)}
       </div>
     </div>`;
 }

@@ -8,7 +8,7 @@
   --text:        #1c1c1c;
   --text-mid:    #666;
   --border:      #dfdedd;
-  --pink:        #e8547a;   /* feller accent-roze */
+  --pink:        #d4779a;   /* soft roze */
   --blue:        #5578a0;
   --placeholder: #e4e3e1;
   --nav-h:       58px;
@@ -54,13 +54,21 @@ body {
 }
 
 .nav-logo {
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  font-weight: 300;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  font-weight: 400;
+  text-transform: uppercase;
   flex-shrink: 0;
   transition: color 0.2s;
 }
 .nav-logo:hover { color: var(--pink); }
+
+/* Rechtergroep: links + taalschakelaar + hamburger samen */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
 
 /* Nav links */
 .nav-links {
@@ -209,10 +217,10 @@ body {
   color: #b0afad;
 }
 
-/* Naam-overlay — desktop: gecentreerd bovenin, wit */
+/* Naam-overlay — desktop: alias klein onderaan hero */
 .hero-content {
   position: absolute;
-  top: 13%;
+  bottom: calc(var(--hero-frame) + 1.5rem);
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -222,17 +230,19 @@ body {
   pointer-events: none;
 }
 
-.hero-name {
-  font-size: clamp(2.5rem, 5.5vw, 5rem);
-  font-weight: 300;
-  letter-spacing: 0.04em;
-  line-height: 1.1;
-  color: #fff;
-  text-shadow: 0 1px 24px rgba(0, 0, 0, 0.28);
-}
+/* Volledige naam: alleen zichtbaar op mobiel */
+.hero-name { display: none; }
 
-/* "Meer Merel" subtitle: verborgen op desktop */
-.hero-alias { display: none; }
+/* Alias "Meer Merel": klein in nav-stijl onderaan hero */
+.hero-alias {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
+}
 
 /* ── Secties ────────────────────────────────────────────────── */
 .section {
@@ -270,7 +280,7 @@ body {
 
 .archive-year-heading {
   font-size: 0.68rem;
-  font-weight: 300;             /* light voor de jaartallen */
+  font-weight: 400;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-mid);
@@ -346,9 +356,7 @@ body {
 
 /* ── CV ──────────────────────────────────────────────────────── */
 .cv-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 4rem;
+  max-width: 680px;
 }
 
 .cv-block { margin-bottom: 2.5rem; }
@@ -532,31 +540,35 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
 /* ── Responsive: mobiel ─────────────────────────────────────── */
 @media (max-width: 600px) {
 
-  /* Hero: geen kader, naam onderaan links, donkere tekst */
+  /* Hero: geen kader, naam en alias onderaan gecentreerd */
   .hero-bg { inset: 0; }
 
   .hero-content {
-    top: auto;
     bottom: 2.75rem;
-    left: var(--pad-x);
+    left: 0;
+    right: 0;
     transform: none;
-    text-align: left;
-    width: auto;
-    padding: 0;
+    text-align: center;
+    width: 100%;
+    padding: 0 var(--pad-x);
   }
 
   .hero-name {
+    display: block;
     font-size: clamp(2rem, 8vw, 3rem);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
     color: var(--text);
     text-shadow: none;
   }
 
   .hero-alias {
-    display: block;
     font-size: 0.75rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--text-mid);
+    text-shadow: none;
     margin-top: 0.5rem;
   }
 
