@@ -228,8 +228,8 @@ const ARTWORKS = [
     dimensions: '128 x 90 cm',
     description: '',
     ratio: '4/5',
-    images: ['images/2025_deconfrontatie_a.jpg'],
-    thumbnail: 'images/2025_deconfrontatie_a.jpg',
+    images: ['images/2025_de confrontatie_a.jpg'],
+    thumbnail: 'images/2025_de confrontatie_a.jpg',
   },
   // ── 2024 ──────────────────────────────────────────────────
   {
