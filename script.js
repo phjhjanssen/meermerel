@@ -589,7 +589,7 @@ function renderArchive() {
     const imgEl = el.querySelector('.archive-thumb-img');
 
     // Thumbnail laden
-    loadImage(imgEl, work.images[0] || work.thumbnail, work.ratio, work.title);
+    loadImage(imgEl, work.thumbnail || work.images[0], work.ratio, work.title);
 
     // Lightbox openen
     const open = () => openLightbox(work.id);
