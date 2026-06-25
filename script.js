@@ -224,12 +224,12 @@ const ARTWORKS = [
     id: 'w2501',
     year: 2025,
     title: 'De confrontatie',
-    medium: 'Olieverf op linnen',
+    medium: 'Olieverf op doek',
     dimensions: '128 x 90 cm',
-    description: 
+    description: '',
     ratio: '4/5',
-    images: ['2025_deconfrontatie_a.jpg'],
-    thumbnail: '2025_deconfrontatie_a.jpg'
+    images: ['images/2025_deconfrontatie_a.jpg'],
+    thumbnail: 'images/2025_deconfrontatie_a.jpg',
   },
   // ── 2024 ──────────────────────────────────────────────────
   {
