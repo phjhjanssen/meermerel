@@ -520,12 +520,12 @@ function isRealImage(src) {
 
 function loadImage(el, src, ratio, label) {
   if (!isRealImage(src)) {
-    el.style.backgroundImage = 'url(' + svgPlaceholder(ratio, label) + ')';
+    el.src = svgPlaceholder(ratio, label);
     return;
   }
   const img = new Image();
-  img.onload  = () => { el.style.backgroundImage = 'url(' + src + ')'; };
-  img.onerror = () => { el.style.backgroundImage = 'url(' + svgPlaceholder(ratio, label) + ')'; };
+  img.onload  = () => { el.src = src; };
+  img.onerror = () => { el.src = svgPlaceholder(ratio, label); };
   img.src = src;
 }
 
@@ -568,11 +568,9 @@ function renderArchive() {
              data-work-id="${escapeHtml(work.id)}"
              role="button" tabindex="0"
              aria-label="${escapeHtml(work.title)}">
-          <div class="archive-thumb-img"
-               data-src="${escapeHtml(work.thumbnail)}"
-               data-ratio="${work.ratio}"
-               data-label="${escapeHtml(work.title)}"
-               style="aspect-ratio:${work.ratio}"></div>
+          <img class="archive-thumb-img"
+               src="${escapeHtml(svgPlaceholder(work.ratio, work.title))}"
+               alt="${escapeHtml(work.title)}">
           ${dots}
           <div class="archive-thumb-caption">
             <span class="archive-thumb-title">${escapeHtml(work.title)}</span>
