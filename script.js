@@ -112,22 +112,18 @@ const i18n = {
     statement: `
       <p>My work is aware of you.</p>
       <p>
-        In my practice, I explore the boundary between looking and being looked at.
-        I see the interaction between audience and work as a temporary encounter,
-        in which the viewer becomes part of the work itself.
+        In my practice, I question the boundary between looking and being seen. I view 
+        the interaction between the audience and the artwork as a temporary encounter, in which 
+        the spectator becomes a part of the work itself.
       </p>
       <p>
-        This encounter translates into the image. A questioning gaze breaks through
-        the fourth wall of the painting, and sculptures keep the viewer in their sights.
+       This encounter translates into the image. A questioning gaze breaks the painting's fourth wall, while sculptures keep the viewer firmly in their sights.
       </p>
       <p>
-        On the canvas, recognisable figures return, disappearing into their surroundings
-        and dissolving into the background. They exist between the tangible and the
-        intangible, just like the materials from which they are made.
+       Recognizable figures return to the canvas, fading into their surroundings and dissolving into the background. They exist between the tangible and the elusive, much like the materials they are built from.
       </p>
       <p>
-        LED light and oil paint form a surface that relates to the viewer anew each time.
-        Perhaps the work moves, just barely, precisely when your eyes wander elsewhere.
+      LED light and oil paint form a surface that constantly shifts its relationship with the observer. Perhaps the work moves ever so slightly, just as your eyes start to wander elsewhere.
       </p>
     `,
   },
