@@ -186,10 +186,10 @@ body {
   overflow: hidden;
 }
 
-/* Wrapper met frame: laat achtergrondkleur als kader zien */
+/* Wrapper met frame: zijkanten + grijze strook onderaan voor titel */
 .hero-bg {
   position: absolute;
-  inset: 0 var(--hero-frame);
+  inset: 0 var(--hero-frame) 2.2rem;
   overflow: hidden;
 }
 
@@ -217,15 +217,19 @@ body {
   color: #b0afad;
 }
 
-/* Naam-overlay — desktop: alias klein onderaan hero */
+/* Naam-overlay — desktop: alias in grijze strook onder de foto */
 .hero-content {
   position: absolute;
-  bottom: calc(var(--hero-frame) + 1.5rem);
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
   width: 100%;
   padding: 0 var(--pad-x);
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 2;
   pointer-events: none;
 }
@@ -233,15 +237,14 @@ body {
 /* Volledige naam: alleen zichtbaar op mobiel */
 .hero-name { display: none; }
 
-/* Alias "Meer Merel": klein in nav-stijl onderaan hero */
+/* Alias "Meer Merel": klein in nav-stijl, donker op grijze achtergrond */
 .hero-alias {
   display: block;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 400;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #fff;
-  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
+  color: var(--text-mid);
 }
 
 /* ── Secties ────────────────────────────────────────────────── */
@@ -540,7 +543,7 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
 /* ── Responsive: mobiel ─────────────────────────────────────── */
 @media (max-width: 600px) {
 
-  /* Hero: geen kader, naam en alias onderaan gecentreerd */
+  /* Hero: full-bleed, naam en alias onderaan gecentreerd */
   .hero-bg { inset: 0; }
 
   .hero-content {
@@ -550,7 +553,9 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
     transform: none;
     text-align: center;
     width: 100%;
+    height: auto;
     padding: 0 var(--pad-x);
+    display: block;
   }
 
   .hero-name {
