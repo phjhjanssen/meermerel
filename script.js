@@ -751,23 +751,28 @@ function renderAgenda() {
 // HERO — rotatie + desktop/mobiel
 // ─────────────────────────────────────────────────────────────
 
+let heroInterval = null;
+const heroMQ = window.matchMedia('(max-width: 600px)');
+
 function initHero() {
   const heroBg = document.getElementById('heroBg');
-  const isMobile = () => window.innerWidth <= 600;
+
+  // Ruim vorige inhoud en rotatie-interval op
+  heroBg.innerHTML = '';
+  if (heroInterval) { clearInterval(heroInterval); heroInterval = null; }
 
   function getSources() {
-    if (isMobile()) {
+    if (heroMQ.matches) {
       const m = HERO_IMAGES.mobile.filter(Boolean);
       return m.length ? m : HERO_IMAGES.desktop;
     }
     return HERO_IMAGES.desktop;
   }
 
-  // Laad bronnen en maak slides
   const sources = getSources();
   const loaded = [];
 
-  let placeholder = document.createElement('div');
+  const placeholder = document.createElement('div');
   placeholder.className = 'hero-placeholder-label';
   placeholder.textContent = 'Afbeelding: images/hero.jpg';
   heroBg.appendChild(placeholder);
@@ -790,14 +795,11 @@ function initHero() {
       loaded.push(slide);
     });
 
-    if (loaded.length) {
-      placeholder.style.display = 'none';
-    }
+    if (loaded.length) placeholder.style.display = 'none';
 
-    // Rotatie starten als er meer dan één afbeelding is
     if (loaded.length > 1) {
       let current = 0;
-      setInterval(() => {
+      heroInterval = setInterval(() => {
         loaded[current].classList.remove('active');
         current = (current + 1) % loaded.length;
         loaded[current].classList.add('active');
@@ -805,6 +807,9 @@ function initHero() {
     }
   });
 }
+
+// Wissel beeld wanneer de 600px-grens wordt overschreden
+heroMQ.addEventListener('change', initHero);
 
 // ─────────────────────────────────────────────────────────────
 // LIGHTBOX
