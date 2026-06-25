@@ -307,7 +307,7 @@ body {
 }
 
 .archive-thumb-img {
-  height: 260px;       /* vaste hoogte; breedte volgt uit aspect-ratio */
+  height: 325px;       /* vaste hoogte; breedte volgt uit aspect-ratio */
   display: block;
   background-color: var(--placeholder);
   background-size: cover;
@@ -540,7 +540,7 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
 @media (max-width: 860px) {
   .cv-grid { gap: 0; }
   .archive-grid { gap: 0.9rem; }
-  .archive-thumb-img { height: 220px; }
+  .archive-thumb-img { height: 275px; }
 }
 
 /* ── Responsive: mobiel ─────────────────────────────────────── */
@@ -610,7 +610,7 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
 
   /* Archief grid */
   .archive-grid { gap: 0.75rem; }
-  .archive-thumb-img { height: 160px; }
+  .archive-thumb-img { height: 200px; }
 
   /* Agenda */
   .agenda-item { grid-template-columns: 1fr; gap: 0.3rem; }
@@ -625,5 +625,5 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
 }
 
 @media (max-width: 400px) {
-  .archive-thumb-img { height: 130px; }
+  .archive-thumb-img { height: 163px; }
 }
