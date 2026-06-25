@@ -557,11 +557,7 @@ function renderArchive() {
     const works = ARTWORKS.filter(w => w.year === year);
 
     const thumbs = works.map(work => {
-      const hasMult = work.images.length > 1;
-      const dots = hasMult
-        ? `<div class="archive-thumb-dots">${work.images.map((_, i) =>
-            `<span class="archive-dot${i === 0 ? ' active' : ''}"></span>`).join('')}</div>`
-        : '';
+      const dots = '';
 
       return `
         <div class="archive-thumb"
@@ -591,36 +587,9 @@ function renderArchive() {
     const work = ARTWORKS.find(w => w.id === el.dataset.workId);
     if (!work) return;
     const imgEl = el.querySelector('.archive-thumb-img');
-    const dotsEls = el.querySelectorAll('.archive-dot');
 
     // Thumbnail laden
     loadImage(imgEl, work.images[0] || work.thumbnail, work.ratio, work.title);
-
-    // Sneak peek: blader door foto's na 500ms hoveren
-    let hoverDelay = null;
-    let hoverInterval = null;
-
-    function startCycle() {
-      if (work.images.length <= 1) return;
-      let idx = 1;
-      hoverInterval = setInterval(() => {
-        loadImage(imgEl, work.images[idx % work.images.length], work.ratio, work.title);
-        dotsEls.forEach((d, i) => d.classList.toggle('active', i === idx % work.images.length));
-        idx++;
-      }, 900);
-    }
-
-    function stopCycle() {
-      clearTimeout(hoverDelay);
-      clearInterval(hoverInterval);
-      loadImage(imgEl, work.images[0] || work.thumbnail, work.ratio, work.title);
-      dotsEls.forEach((d, i) => d.classList.toggle('active', i === 0));
-    }
-
-    el.addEventListener('mouseenter', () => {
-      hoverDelay = setTimeout(startCycle, 500);
-    });
-    el.addEventListener('mouseleave', stopCycle);
 
     // Lightbox openen
     const open = () => openLightbox(work.id);
