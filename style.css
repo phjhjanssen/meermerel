@@ -307,8 +307,9 @@ body {
 }
 
 .archive-thumb-img {
-  height: 480px;       /* vaste hoogte; breedte volgt uit aspect-ratio */
-  display: block;
+  height: 480px;
+  display: inline-block;   /* inline-block: breedte = hoogte × ratio */
+  vertical-align: top;
   background-color: var(--placeholder);
   background-size: cover;
   background-position: center;
