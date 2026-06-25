@@ -241,8 +241,8 @@ const ARTWORKS = [
     dimensions: '128 x 90 cm',
     description: '',
     ratio: '4/3',
-    images: ['images/2025_who wants to be_a.png'],
-    thumbnail: 'images/2025_who wants to be like all the girls_thumb.png',
+    images: ['images/2025_who wants to be_a.jpg'],
+    thumbnail: 'images/2025_who wants to be_thumb.jpg',
   },
   {
     id: 'w2403',
