@@ -236,12 +236,12 @@ const ARTWORKS = [
   {
     id: 'w2402',
     year: 2025,
-    title: '',
+    title: 'Who wants to be like all the girls?',
     medium: 'olieverf op doek',
     dimensions: '128 x 90 cm',
     description: '',
     ratio: '4/3',
-    images: [''],
+    images: ['images/2025_who wants to be_a.png'],
     thumbnail: 'images/2025_who wants to be like all the girls_thumb.png',
   },
   {
