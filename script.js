@@ -235,14 +235,14 @@ const ARTWORKS = [
   },
   {
     id: 'w2402',
-    year: 2024,
+    year: 2025,
     title: '',
-    medium: 'Acrylverf op papier',
-    dimensions: '60 × 80 cm',
+    medium: 'olieverf op doek',
+    dimensions: '128 x 90 cm',
     description: '',
     ratio: '4/3',
     images: [''],
-    thumbnail: '',
+    thumbnail: 'images/2025_who wants to be like all the girls_thumb.png',
   },
   {
     id: 'w2403',
