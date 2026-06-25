@@ -229,7 +229,7 @@ const ARTWORKS = [
     description: '',
     ratio: '4/5',
     images: ['images/2025_de confrontatie_a.jpg'],
-    thumbnail: 'images/2025_de confrontatie_a.jpg',
+    thumbnail: 'images/2025_de confrontatie_thumb.jpg',
   },
   // ── 2024 ──────────────────────────────────────────────────
   {
