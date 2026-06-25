@@ -88,23 +88,9 @@ body {
   transition: color 0.2s;
 }
 
-/* Hover: roze tekst + streepje eronder */
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--pink);
-  transition: width 0.25s ease;
-}
-
+/* Hover: alleen roze tekst, geen streepje */
 .nav-links a:hover {
   color: var(--pink);
-}
-.nav-links a:hover::after {
-  width: 100%;
 }
 
 /* Actief (scroll-spy): roze tekst, géén streepje */
@@ -136,7 +122,7 @@ body {
   transition: color 0.2s;
   font-family: inherit;
 }
-.lang-btn:hover { color: var(--text); }
+.lang-btn:hover { color: var(--pink); }
 .lang-btn.active {
   color: var(--text);
   font-weight: 400;
@@ -233,9 +219,10 @@ body {
   display: block;
   font-size: clamp(2.2rem, 4.5vw, 4rem);
   font-weight: 300;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   line-height: 1.1;
-  color: var(--text);
+  color: #1c1c1c;
 }
 
 .hero-alias {
@@ -558,12 +545,10 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
   }
 
   .hero-name {
-    display: block;
     font-size: clamp(2rem, 8vw, 3rem);
-    font-weight: 300;
-    letter-spacing: 0.04em;
-    line-height: 1.1;
-    color: var(--text);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #1c1c1c;
     text-shadow: none;
   }
 
