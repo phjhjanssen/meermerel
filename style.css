@@ -186,10 +186,10 @@ body {
   overflow: hidden;
 }
 
-/* Wrapper met frame: zijkanten + grijze strook onderaan voor titel */
+/* Wrapper met frame: laat achtergrondkleur als kader zien */
 .hero-bg {
   position: absolute;
-  inset: 0 var(--hero-frame) 2.2rem;
+  inset: 0 var(--hero-frame);
   overflow: hidden;
 }
 
@@ -217,34 +217,36 @@ body {
   color: #b0afad;
 }
 
-/* Naam-overlay — desktop: alias in grijze strook onder de foto */
+/* Naam-overlay — desktop: naam + alias onderaan, donkere tekst */
 .hero-content {
   position: absolute;
-  bottom: 0;
+  bottom: 2.5rem;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
   width: 100%;
   padding: 0 var(--pad-x);
-  height: 2.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 2;
   pointer-events: none;
 }
 
-/* Volledige naam: alleen zichtbaar op mobiel */
-.hero-name { display: none; }
+.hero-name {
+  display: block;
+  font-size: clamp(2.2rem, 4.5vw, 4rem);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  color: var(--text);
+}
 
-/* Alias "Meer Merel": klein in nav-stijl, donker op grijze achtergrond */
 .hero-alias {
   display: block;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-mid);
+  margin-top: 0.6rem;
 }
 
 /* ── Secties ────────────────────────────────────────────────── */
@@ -553,9 +555,7 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
     transform: none;
     text-align: center;
     width: 100%;
-    height: auto;
     padding: 0 var(--pad-x);
-    display: block;
   }
 
   .hero-name {
