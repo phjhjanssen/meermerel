@@ -223,13 +223,13 @@ const ARTWORKS = [
   {
     id: 'w2501',
     year: 2025,
-    title: 'Vreemd?',
+    title: 'De confrontatie',
     medium: 'Olieverf op linnen',
-    dimensions: '80 × 100 cm',
-    description: 'Vertel hier iets over het werk: het ontstaan, de context of de betekenis. Je kunt dit ook leeg laten.',
+    dimensions: '128 x 90 cm',
+    description: 
     ratio: '4/5',
-    images: ['images/2025_12_a.jpg', 'images/2025_12_a.png'],
-    thumbnail: 'images/2025_12_a.jpg',
+    images: ['2025_deconfrontatie_a.jpg'],
+    thumbnail: '2025_deconfrontatie_a.jpg'
   },
   // ── 2024 ──────────────────────────────────────────────────
   {
