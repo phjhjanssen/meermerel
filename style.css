@@ -186,10 +186,9 @@ body {
   overflow: hidden;
 }
 
-/* Wrapper met frame: laat achtergrondkleur als kader zien */
 .hero-bg {
   position: absolute;
-  inset: 0 var(--hero-frame);
+  inset: 0;
   overflow: hidden;
 }
 
