@@ -205,19 +205,9 @@ const ARTWORKS = [
     dimensions: '80 × 100 cm',
     description: 'Een libanese twist met mooie bloemetjes',
     ratio: '4/5',
-    images: ['images/2026_04_a.jpg', 'images/2026_04_b.jpg', 'images/2026_04_c.jpg'],
-    thumbnail: 'images/2026_04_a.jpg',
-  },
-  {
-    id: 'w2603',
-    year: 2026,
-    title: 'Amy is gek',
-    medium: 'Gemengde techniek op doek',
-    dimensions: '120 × 90 cm',
-    description: '',
-    ratio: '4/5',
-    images: ['images/2026_03_a.jpg'],
-    thumbnail: 'images/2026_03_a.jpg',
+    images: '',
+    thumbnail: '',
+ 
   },
   // ── 2025 ──────────────────────────────────────────────────
   {
