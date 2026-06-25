@@ -756,8 +756,9 @@ function initHero() {
   const isMobile = () => window.innerWidth <= 600;
 
   function getSources() {
-    if (isMobile() && HERO_IMAGES.mobile.length) {
-      return [...HERO_IMAGES.mobile, ...HERO_IMAGES.desktop];
+    if (isMobile()) {
+      const m = HERO_IMAGES.mobile.filter(Boolean);
+      return m.length ? m : HERO_IMAGES.desktop;
     }
     return HERO_IMAGES.desktop;
   }
