@@ -265,6 +265,18 @@ const ARTWORKS = [
     images: ['images/2025_Fall_a.jpg'],
     thumbnail: 'images/2026_fall_c.jpg',
   },
+   {
+    id: 'w2503',
+    year: 2025,
+    title: '"Care"',
+    medium: 'keramiek, metaal en steen',
+    dimensions: '127 x 12 x 14 cm',
+    description: '',
+    ratio: '4/5',
+    images: ['images/2025_care_a.jpg','images/2025_care_b.jpg'],
+    thumbnail: 'images/2025_care_a.jpg',
+  },
+   
   // ── 2024 ──────────────────────────────────────────────────
   {
     id: 'w2403',
