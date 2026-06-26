@@ -187,6 +187,17 @@ const HERO_IMAGES = {
 const ARTWORKS = [
   // ── 2026 ──────────────────────────────────────────────────
   {
+    id: 'w2605',
+    year: 2026,
+    title: 'Het breken van een herinnering',
+    medium: 'ledlicht en olieverf op doek',
+    dimensions: '60 x 150 cm',
+    description: '',
+    ratio: '5/3',
+    images: ['images/2026_breken_a.jpg','images/2026_breken_b.jpg','images/2026_breken_e.jpg'],
+    thumbnail: 'images/2026_breken_a.jpg',
+  }, 
+   {
     id: 'w2604',
     year: 2026,
     title: 'Een zee van mensen',
@@ -196,7 +207,8 @@ const ARTWORKS = [
     ratio: '5/3',
     images: ['images/2026_een zee_a.jpg'],
     thumbnail: 'images/2026_een zee_c.jpg',
-  }, {
+  }, 
+   {
     id: 'w2603',
     year: 2026,
     title: '"Kickbacks"',
