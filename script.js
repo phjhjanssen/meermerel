@@ -193,7 +193,7 @@ const ARTWORKS = [
     medium: 'olieverf op doek',
     dimensions: '150 x 325 cm',
     description: '',
-    ratio: '3/4',
+    ratio: '5/3',
     images: ['images/2026_een zee_a.jpg'],
     thumbnail: 'images/2026_een zee_c.jpg',
   }, {
