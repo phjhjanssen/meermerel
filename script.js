@@ -222,6 +222,17 @@ const ARTWORKS = [
   },
   // ── 2025 ──────────────────────────────────────────────────
   {
+    id: 'w2402',
+    year: 2025,
+    title: 'Who wants to be like all the girls?',
+    medium: 'olieverf op doek',
+    dimensions: '128 x 90 cm',
+    description: '',
+    ratio: '4/3',
+    images: ['images/2025_who wants to be_a.jpg'],
+    thumbnail: 'images/2025_who wants to be_thumb.jpg',
+  },
+   {
     id: 'w2501',
     year: 2025,
     title: 'De confrontatie',
@@ -243,17 +254,6 @@ const ARTWORKS = [
     ratio: '4/5',
     images: ['images/2025_pak liever een emmer_a.jpg'],
     thumbnail: 'images/2025_pak liever een emmer_thumb.jpg',
-  },
-  {
-    id: 'w2402',
-    year: 2025,
-    title: 'Who wants to be like all the girls?',
-    medium: 'olieverf op doek',
-    dimensions: '128 x 90 cm',
-    description: '',
-    ratio: '4/3',
-    images: ['images/2025_who wants to be_a.jpg'],
-    thumbnail: 'images/2025_who wants to be_thumb.jpg',
   },
   {
     id: 'w2403',
