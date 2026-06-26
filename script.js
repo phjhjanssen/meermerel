@@ -263,7 +263,7 @@ const ARTWORKS = [
     description: '',
     ratio: '4/5',
     images: ['images/2025_Fall_a.jpg'],
-    thumbnail: 'images/2026_fall_b.jpg',
+    thumbnail: 'images/2026_fall_c.jpg',
   },
   // ── 2024 ──────────────────────────────────────────────────
   {
