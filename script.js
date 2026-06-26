@@ -409,13 +409,12 @@ const ARTWORKS = [
 
 const CV_DATA = {
   personal: [
-    { key: 'born',  value: '17 maart 2001, Utrecht' },
+    { key: 'born',  value: '17-03-2001, Utrecht' },
     { key: 'lives', value: 'Nijmegen, Nederland' },
   ],
   education: [
     ['2022–2026', 'BA Art & Research, St. Joost, \'s-Hertogenbosch'],
     ['2024–2025', 'Minor Kunstgeschiedenis, Radboud Universiteit, Nijmegen'],
-    ['2020',      'Propedeuse Vaktherapie, HAN, Nijmegen'],
     ['2018',      'Brede basisopleiding, HKU, Utrecht'],
   ],
   residencies: [
