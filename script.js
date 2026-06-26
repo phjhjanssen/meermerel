@@ -194,8 +194,8 @@ const ARTWORKS = [
     dimensions: '325 x 70 cm',
     description: '',
     ratio: '3/4',
-    images: [''],
-    thumbnail: '',
+    images: ['images/2026_kickback_a.jpg','images/2026_kickback_b.jpg','images/2026_kickback_c.jpg'],
+    thumbnail: 'images/2026_kickback_a.jpg',
   },
    {
     id: 'w2601',
