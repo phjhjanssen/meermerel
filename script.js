@@ -243,8 +243,7 @@ const ARTWORKS = [
     images: ['images/2025_de confrontatie_a.jpg'],
     thumbnail: 'images/2025_de confrontatie_thumb.jpg',
   },
-  // ── 2024 ──────────────────────────────────────────────────
-  {
+    {
     id: 'w2401',
     year: 2025,
     title: 'Pak liever een emmer',
@@ -255,6 +254,18 @@ const ARTWORKS = [
     images: ['images/2025_pak liever een emmer_a.jpg'],
     thumbnail: 'images/2025_pak liever een emmer_thumb.jpg',
   },
+    {
+    id: 'w2502',
+    year: 2025,
+    title: '"I, Fall, Apart"',
+    medium: 'Olieverf op doek',
+    dimensions: '90 x 160 cm',
+    description: '',
+    ratio: '4/5',
+    images: [''],
+    thumbnail: '',
+  },
+  // ── 2024 ──────────────────────────────────────────────────
   {
     id: 'w2403',
     year: 2024,
