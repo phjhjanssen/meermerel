@@ -451,8 +451,8 @@ const CV_DATA = {
 
 const CONTACT_DATA = [
   { key: 'email',     value: 'meermerelmailt@gmail.com', href: 'mailto:meermerelmailt@gmail.com' },
-  { key: 'instagram', value: '@meer.merel_', href: 'https://www.instagram.com/meer.merel_', external: true },
-  { key: 'phone',     value: '+31 (0)6 — — — — — —', href: null },
+  { key: 'instagram', value: '@meermerel_', href: 'https://www.instagram.com/meer.merel_', external: true },
+  { key: 'phone number',     value: '+31 (0)6 37277662', href: null },
 ];
 
 // ─────────────────────────────────────────────────────────────
