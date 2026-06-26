@@ -262,8 +262,8 @@ const ARTWORKS = [
     dimensions: '90 x 160 cm',
     description: '',
     ratio: '4/5',
-    images: [''],
-    thumbnail: '',
+    images: ['images/2025_Fall_a.jpg'],
+    thumbnail: 'images/2026_fall_b.jpg',
   },
   // ── 2024 ──────────────────────────────────────────────────
   {
