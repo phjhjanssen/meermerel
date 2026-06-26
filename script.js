@@ -326,13 +326,13 @@ const ARTWORKS = [
   {
     id: 'w2301',
     year: 2023,
-    title: 'Landschap met figuur',
-    medium: 'Olieverf op linnen',
-    dimensions: '100 × 130 cm',
+    title: '"Hang in there"',
+    medium: 'Acrylverf op doek',
+    dimensions: '23 x 15 cm',
     description: '',
     ratio: '4/5',
-    images: ['images/2023_01_a.jpg', 'images/2023_01_b.jpg'],
-    thumbnail: 'images/2023_01_a.jpg',
+    images: ['images/2023_hang_a.jpg'],
+    thumbnail: 'images/2023_hang_a.jpg',
   },
   {
     id: 'w2302',
