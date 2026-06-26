@@ -222,7 +222,7 @@ const ARTWORKS = [
    {
     id: 'w2601',
     year: 2026,
-    title: '(Inhoud tussen haakjes)',
+    title: '(Inhoud tussen haakjes) samenwerking met Marijke Bot', 
     medium: 'houtskool, verf van uischillen en draad op canvas',
     dimensions: '17 x 27 x 6,5 m',
     description: '',
