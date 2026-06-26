@@ -218,18 +218,7 @@ const ARTWORKS = [
     images: ['images/2026_de fabriek_a.jpg','images/2026_de fabriek_b.jpg','images/2026_de fabriek_c.jpg','images/2026_de fabriek_d.jpg','images/2026_de fabriek_e.jpg','images/2026_de fabriek_f.jpg'],
     thumbnail: 'images/2026_de fabriek_a.jpg',
   },
-  {
-    id: 'w2602',
-    year: 2026,
-    title: '',
-    medium: 'Olieverf op linnen',
-    dimensions: '80 × 100 cm',
-    description: '',
-    ratio: '4/5',
-    images: '',
-    thumbnail: '',
  
-  },
   // ── 2025 ──────────────────────────────────────────────────
   {
     id: 'w2402',
