@@ -246,7 +246,7 @@ const ARTWORKS = [
     {
     id: 'w2401',
     year: 2025,
-    title: 'Pak liever een emmer',
+    title: '"Pak liever een emmer"',
     medium: 'Olieverf op doek',
     dimensions: '128 x 90 cm',
     description: '',
@@ -275,6 +275,17 @@ const ARTWORKS = [
     ratio: '4/5',
     images: ['images/2025_care_a.jpg','images/2025_care_b.jpg'],
     thumbnail: 'images/2025_care_a.jpg',
+  },
+    {
+    id: 'w2504',
+    year: 2025,
+    title: '"Hold"',
+    medium: 'keramiek',
+    dimensions: '10 x 25 x 16cm',
+    description: '',
+    ratio: '4/5',
+    images: ['images/2025_hold_b.jpg'],
+    thumbnail: 'images/2025_hold_b.jpg',
   },
    
   // ── 2024 ──────────────────────────────────────────────────
