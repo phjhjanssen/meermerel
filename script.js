@@ -205,7 +205,7 @@ const ARTWORKS = [
     dimensions: '150 x 325 cm',
     description: '',
     ratio: '5/3',
-    images: ['images/2026_een zee_a.jpg'],
+    images: ['images/2026_een zee_a.jpg','images/2026_een zee_d.jpg'],
     thumbnail: 'images/2026_een zee_c.jpg',
   }, 
    {
