@@ -301,29 +301,6 @@ const ARTWORKS = [
    
   // ── 2024 ──────────────────────────────────────────────────
   {
-    id: 'w2403',
-    year: 2024,
-    title: '',
-    medium: '',
-    dimensions: '',
-    description: '',
-    ratio: '4/5',
-    images: [''],
-    thumbnail: '',
-  },
-  {
-    id: 'w2404',
-    year: 2024,
-    title: 'Herinnering aan de ochtend',
-    medium: 'Aquarel op papier',
-    dimensions: '30 × 40 cm',
-    description: '',
-    ratio: '3/4',
-    images: ['images/2024_04_a.jpg'],
-    thumbnail: 'images/2024_04_a.jpg',
-  },
-  // ── 2023 ──────────────────────────────────────────────────
-  {
     id: 'w2301',
     year: 2023,
     title: '"Hang in there"',
@@ -334,6 +311,8 @@ const ARTWORKS = [
     images: ['images/2023_hang_a.jpg'],
     thumbnail: 'images/2023_hang_a.jpg',
   },
+  // ── 2023 ──────────────────────────────────────────────────
+
   {
     id: 'w2302',
     year: 2023,
