@@ -187,6 +187,16 @@ const HERO_IMAGES = {
 const ARTWORKS = [
   // ── 2026 ──────────────────────────────────────────────────
   {
+    id: 'w2604',
+    year: 2026,
+    title: 'Een zee van mensen',
+    medium: 'olieverf op doek',
+    dimensions: '150 x 325 cm',
+    description: '',
+    ratio: '3/4',
+    images: ['images/2026_een zee_a.jpg'],
+    thumbnail: 'images/2026_een zee_c.jpg',
+  }, {
     id: 'w2603',
     year: 2026,
     title: '"Kickbacks"',
@@ -281,7 +291,7 @@ const ARTWORKS = [
     year: 2025,
     title: '"Hold"',
     medium: 'keramiek',
-    dimensions: '10 x 25 x 16cm',
+    dimensions: '10 x 25 x 16 cm',
     description: '',
     ratio: '4/5',
     images: ['images/2025_hold_b.jpg'],
