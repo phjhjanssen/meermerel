@@ -462,24 +462,17 @@ const CONTACT_DATA = [
 const AGENDA_DATA = {
   current: [
     {
-      title:    '"[Naam tentoonstelling]"',
-      location: '[Galerie / Museum], [Stad]',
+      title:    '"[naam]"',
+      location: '[galerie], [stad]',
       date:     't/m [maand] 2025',
       status:   'lopend',
     },
   ],
   upcoming: [
     {
-      title:    '"[Naam tentoonstelling]"',
-      location: '[Galerie / Museum], [Stad]',
-      date:     '[maand] 2025',
-      status:   'aankomend',
-    },
-    {
-      title:    '"[Naam tentoonstelling]"',
-      location: '[Galerie / Museum], [Stad]',
-      date:     '[maand] 2026',
-      status:   'aankomend',
+      title:    '"De afstand met je handen meten"',
+      location: 'St. Joost School of Art & Design s-Hertogenbosch',
+      date:     '2 tot en met 5 juli 2026',
     },
   ],
 };
