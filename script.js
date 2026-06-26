@@ -194,7 +194,7 @@ const ARTWORKS = [
     dimensions: '17 x 27 x 6,5 m',
     description: '',
     ratio: '3/4',
-    images: ['images/2026_de fabriek_a.jpg','images/2026_de fabriek_b.jpg','images/2026_de fabriek_c.jpg','images/2026_de fabriek_d.jpg','images/2026_de fabriek_e.jpg',images/2026_de fabriek_f.jpg'],
+    images: ['images/2026_de fabriek_a.jpg','images/2026_de fabriek_b.jpg','images/2026_de fabriek_c.jpg','images/2026_de fabriek_d.jpg','images/2026_de fabriek_e.jpg','images/2026_de fabriek_f.jpg'],
     thumbnail: 'images/2026_de fabriek_a.jpg',
   },
   {
