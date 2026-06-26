@@ -472,7 +472,7 @@ const AGENDA_DATA = {
     {
       title:    '"De afstand met je handen meten"',
       location: 'St. Joost School of Art & Design s-Hertogenbosch',
-      date:     '2 tot en met 5 juli 2026',
+      date:     '2-5 juli, 2026',
     },
   ],
 };
