@@ -195,7 +195,7 @@ const ARTWORKS = [
     description: '',
     ratio: '5/3',
     images: ['images/2026_breken_a.jpg','images/2026_breken_b.jpg','images/2026_breken_e.jpg'],
-    thumbnail: 'images/2026_breken_c.jpg',
+    thumbnail: 'images/2026_breken_a.jpg',
   }, 
    {
     id: 'w2604',
