@@ -187,6 +187,17 @@ const HERO_IMAGES = {
 const ARTWORKS = [
   // ── 2026 ──────────────────────────────────────────────────
   {
+    id: 'w2603',
+    year: 2026,
+    title: '"Kickbacks"',
+    medium: 'keramiek en metaal',
+    dimensions: '325 x 70 cm',
+    description: '',
+    ratio: '3/4',
+    images: [''],
+    thumbnail: '',
+  },
+   {
     id: 'w2601',
     year: 2026,
     title: '"(Inhoud tussen haakjes)"',
