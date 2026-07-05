@@ -165,18 +165,18 @@ function setLang(lang) {
 // ─────────────────────────────────────────────────────────────
 // Voeg meer afbeeldingen toe om te laten rouleren.
 // Desktop: liggende foto's — Mobiel: staande foto's.
-// Gebruik images/hero_mobile.jpg als je een aparte mobiele foto hebt;
+// Gebruik images/hero_mobile.webp als je een aparte mobiele foto hebt;
 // ontbreekt die, dan valt de site terug op de desktopfoto.
 
 const HERO_IMAGES = {
   desktop: [
-    'images/hero.jpg',
-    // 'images/hero2.jpg',
-    // 'images/hero3.jpg',
+    'images/hero.webp',
+    // 'images/hero2.webp',
+    // 'images/hero3.webp',
   ],
   mobile: [
-    'images/hero_mobile.jpg',  // optioneel — valt terug op hero.jpg
-    // 'images/hero_mobile2.jpg',
+    'images/hero_mobile.webp',  // optioneel — valt terug op hero.jpg
+    // 'images/hero_mobile2.webp',
   ],
 };
 
@@ -194,8 +194,8 @@ const ARTWORKS = [
     dimensions: '60 x 150 cm',
     description: '',
     ratio: '5/3',
-    images: ['images/2026_breken_a.jpg','images/2026_breken_b.jpg','images/2026_breken_e.jpg'],
-    thumbnail: 'images/2026_breken_a.jpg',
+    images: ['images/2026_breken_a.webp','images/2026_breken_b.webp','images/2026_breken_e.webp'],
+    thumbnail: 'images/2026_breken_a.webp',
   }, 
    {
     id: 'w2604',
@@ -205,8 +205,8 @@ const ARTWORKS = [
     dimensions: '150 x 325 cm',
     description: '',
     ratio: '5/3',
-    images: ['images/2026_een zee_a.jpg','images/2026_een zee_d.jpg'],
-    thumbnail: 'images/2026_een zee_c.jpg',
+    images: ['images/2026_een zee_a.webp','images/2026_een zee_d.webp'],
+    thumbnail: 'images/2026_een zee_c.webp',
   }, 
    {
     id: 'w2603',
@@ -216,8 +216,8 @@ const ARTWORKS = [
     dimensions: '325 x 70 cm',
     description: '',
     ratio: '3/4',
-    images: ['images/2026_kickback_a.jpg','images/2026_kickback_b.jpg','images/2026_kickback_c.jpg'],
-    thumbnail: 'images/2026_kickback_a.jpg',
+    images: ['images/2026_kickback_a.webp','images/2026_kickback_b.webp','images/2026_kickback_c.webp'],
+    thumbnail: 'images/2026_kickback_a.webp',
   },
    {
     id: 'w2601',
@@ -227,8 +227,8 @@ const ARTWORKS = [
     dimensions: '17 x 27 x 6,5 m',
     description: '',
     ratio: '3/4',
-    images: ['images/2026_de fabriek_a.jpg','images/2026_de fabriek_b.jpg','images/2026_de fabriek_c.jpg','images/2026_de fabriek_d.jpg','images/2026_de fabriek_e.jpg','images/2026_de fabriek_f.jpg'],
-    thumbnail: 'images/2026_de fabriek_a.jpg',
+    images: ['images/2026_de fabriek_a.webp','images/2026_de fabriek_b.webp','images/2026_de fabriek_c.webp','images/2026_de fabriek_d.webp','images/2026_de fabriek_e.webp','images/2026_de fabriek_f.webp'],
+    thumbnail: 'images/2026_de fabriek_a.webp',
   },
  
   // ── 2025 ──────────────────────────────────────────────────
@@ -240,8 +240,8 @@ const ARTWORKS = [
     dimensions: '128 x 90 cm',
     description: '',
     ratio: '4/3',
-    images: ['images/2025_who wants to be_a.jpg'],
-    thumbnail: 'images/2025_who wants to be_thumb.jpg',
+    images: ['images/2025_who wants to be_a.webp'],
+    thumbnail: 'images/2025_who wants to be_thumb.webp',
   },
    {
     id: 'w2501',
@@ -251,8 +251,8 @@ const ARTWORKS = [
     dimensions: '128 x 90 cm',
     description: '',
     ratio: '4/5',
-    images: ['images/2025_de confrontatie_a.jpg'],
-    thumbnail: 'images/2025_de confrontatie_thumb.jpg',
+    images: ['images/2025_de confrontatie_a.webp'],
+    thumbnail: 'images/2025_de confrontatie_thumb.webp',
   },
      {
     id: 'w2401',
@@ -262,8 +262,8 @@ const ARTWORKS = [
     dimensions: '128 x 90 cm',
     description: '',
     ratio: '4/5',
-    images: ['images/2025_pak liever een emmer_a.jpg'],
-    thumbnail: 'images/2025_pak liever een emmer_thumb.jpg',
+    images: ['images/2025_pak liever een emmer_a.webp'],
+    thumbnail: 'images/2025_pak liever een emmer_thumb.webp',
   },
      {
     id: 'w2502',
@@ -273,8 +273,8 @@ const ARTWORKS = [
     dimensions: '90 x 160 cm',
     description: '',
     ratio: '4/5',
-    images: ['images/2025_Fall_a.jpg'],
-    thumbnail: 'images/2026_fall_c.jpg',
+    images: ['images/2025_Fall_a.webp'],
+    thumbnail: 'images/2026_fall_c.webp',
   },
       {
     id: 'w2503',
@@ -284,8 +284,8 @@ const ARTWORKS = [
     dimensions: '127 x 12 x 14 cm',
     description: '',
     ratio: '4/5',
-    images: ['images/2025_care_a.jpg','images/2025_care_b.jpg'],
-    thumbnail: 'images/2025_care_a.jpg',
+    images: ['images/2025_care_a.webp','images/2025_care_b.webp'],
+    thumbnail: 'images/2025_care_a.webp',
   },
       {
     id: 'w2504',
@@ -295,8 +295,8 @@ const ARTWORKS = [
     dimensions: '10 x 25 x 16 cm',
     description: '',
     ratio: '4/5',
-    images: ['images/2025_hold_b.jpg'],
-    thumbnail: 'images/2025_hold_b.jpg',
+    images: ['images/2025_hold_b.webp'],
+    thumbnail: 'images/2025_hold_b.webp',
   },
    
   // ── 2024 ──────────────────────────────────────────────────
@@ -308,8 +308,8 @@ const ARTWORKS = [
     dimensions: '23 x 15 cm',
     description: '',
     ratio: '4/5',
-    images: ['images/2023_hang_a.jpg'],
-    thumbnail: 'images/2023_hang_a.jpg',
+    images: ['images/2023_hang_a.webp'],
+    thumbnail: 'images/2023_hang_a.webp',
   },
   // ── 2023 ──────────────────────────────────────────────────
 
@@ -334,8 +334,8 @@ const ARTWORKS = [
     dimensions: '',
     description: '',
     ratio: '3/4',
-    images: ['images/2022_01_a.jpg'],
-    thumbnail: 'images/2022_01_a.jpg',
+    images: ['images/2022_01_a.webp'],
+    thumbnail: 'images/2022_01_a.webp',
   },
 
   // ── 2021 ──────────────────────────────────────────────────
@@ -667,7 +667,7 @@ function initHero() {
 
   const placeholder = document.createElement('div');
   placeholder.className = 'hero-placeholder-label';
-  placeholder.textContent = 'Afbeelding: images/hero.jpg';
+  placeholder.textContent = 'Afbeelding: images/hero.webp';
   heroBg.appendChild(placeholder);
 
   function tryLoad(src) {
