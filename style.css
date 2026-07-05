@@ -504,8 +504,8 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
   padding: 5rem var(--pad-x) 4rem;
   gap: 1.75rem;
 }
-.lb-img-wrap { width: 100%; display: flex; align-items: center; justify-content: center; }
-.lb-img { max-height: 72vh; max-width: 100%; object-fit: contain; display: block; }
+.lb-img-wrap { width: 100%; display: flex; align-items: center; justify-content: center; touch-action: none; overflow: hidden; }
+.lb-img { max-height: 72vh; max-width: 100%; object-fit: contain; display: block; transform-origin: center center; transition: transform 0.05s linear; will-change: transform; }
 .lb-info { width: 100%; max-width: 500px; text-align: center; }
 .lb-title { font-size: 1rem; font-weight: 300; letter-spacing: 0.03em; margin-bottom: 0.4rem; }
 .lb-meta  { font-size: 0.78rem; color: var(--text-mid); margin-bottom: 0.65rem; }

@@ -711,6 +711,20 @@ heroMQ.addEventListener('change', initHero);
 let lbWork = null;
 let lbIndex = 0;
 let lbTouchStartX = 0;
+let lbScale = 1, lbPanX = 0, lbPanY = 0;
+let lbPinchStartDist = 0, lbPinchStartScale = 1;
+let lbDragStartX = 0, lbDragStartY = 0, lbPanStartX = 0, lbPanStartY = 0;
+let lbActiveTouches = 0;
+
+function lbApplyTransform() {
+  document.getElementById('lbImg').style.transform =
+    `translate(${lbPanX}px, ${lbPanY}px) scale(${lbScale})`;
+}
+
+function lbResetZoom() {
+  lbScale = 1; lbPanX = 0; lbPanY = 0;
+  lbApplyTransform();
+}
 
 function openLightbox(workId) {
   lbWork = ARTWORKS.find(w => w.id === workId);
@@ -730,6 +744,7 @@ function closeLightbox() {
   lb.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
   lbWork = null;
+  lbResetZoom();
 }
 
 function updateLightbox() {
@@ -756,6 +771,7 @@ function updateLightbox() {
   document.getElementById('lbPrev').classList.toggle('hidden', lbIndex === 0);
   document.getElementById('lbNext').classList.toggle('hidden', lbIndex >= lbWork.images.length - 1);
   document.getElementById('lightbox').scrollTop = 0;
+  lbResetZoom();
 }
 
 function lbPrevImg() { if (lbIndex > 0) { lbIndex--; updateLightbox(); } }
@@ -776,13 +792,49 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') lbNextImg();
 });
 
-document.getElementById('lightbox').addEventListener('touchstart', e => {
-  lbTouchStartX = e.touches[0].clientX;
+// Touch: pinch-zoom + pan + swipe navigatie
+const lbWrap = document.querySelector('.lb-img-wrap');
+
+lbWrap.addEventListener('touchstart', e => {
+  lbActiveTouches = e.touches.length;
+  if (e.touches.length === 2) {
+    const dx = e.touches[1].clientX - e.touches[0].clientX;
+    const dy = e.touches[1].clientY - e.touches[0].clientY;
+    lbPinchStartDist  = Math.hypot(dx, dy);
+    lbPinchStartScale = lbScale;
+  } else {
+    lbTouchStartX = e.touches[0].clientX;
+    lbDragStartX  = e.touches[0].clientX;
+    lbDragStartY  = e.touches[0].clientY;
+    lbPanStartX   = lbPanX;
+    lbPanStartY   = lbPanY;
+  }
 }, { passive: true });
 
-document.getElementById('lightbox').addEventListener('touchend', e => {
-  const diff = lbTouchStartX - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 50) { if (diff > 0) lbNextImg(); else lbPrevImg(); }
+lbWrap.addEventListener('touchmove', e => {
+  if (e.touches.length === 2) {
+    e.preventDefault();
+    const dx   = e.touches[1].clientX - e.touches[0].clientX;
+    const dy   = e.touches[1].clientY - e.touches[0].clientY;
+    const dist = Math.hypot(dx, dy);
+    lbScale = Math.max(1, Math.min(6, lbPinchStartScale * (dist / lbPinchStartDist)));
+    lbApplyTransform();
+  } else if (e.touches.length === 1 && lbScale > 1.05) {
+    e.preventDefault();
+    lbPanX = lbPanStartX + (e.touches[0].clientX - lbDragStartX);
+    lbPanY = lbPanStartY + (e.touches[0].clientY - lbDragStartY);
+    lbApplyTransform();
+  }
+}, { passive: false });
+
+lbWrap.addEventListener('touchend', e => {
+  if (lbScale < 1.1) lbResetZoom();
+  // Swipe voor navigatie alleen als niet ingezoomd
+  if (lbActiveTouches === 1 && lbScale <= 1.05) {
+    const diff = lbTouchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { if (diff > 0) lbNextImg(); else lbPrevImg(); }
+  }
+  lbActiveTouches = e.touches.length;
 }, { passive: true });
 
 // ─────────────────────────────────────────────────────────────
