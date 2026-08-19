@@ -710,20 +710,68 @@ heroMQ.addEventListener('change', initHero);
 
 let lbWork = null;
 let lbIndex = 0;
-let lbTouchStartX = 0;
 let lbScale = 1, lbPanX = 0, lbPanY = 0;
+
+// Pinch (2 vingers)
 let lbPinchStartDist = 0, lbPinchStartScale = 1;
-let lbDragStartX = 0, lbDragStartY = 0, lbPanStartX = 0, lbPanStartY = 0;
-let lbActiveTouches = 0;
+
+// 1 vinger: pannen (ingezoomd) of swipen (niet ingezoomd)
+let lbDragActive = false;
+let lbDragStartX = 0, lbDragStartY = 0;
+let lbPanStartX = 0, lbPanStartY = 0;
+let lbDragMoved = 0;
+
+// Dubbeltik-zoom (mobiel)
+let lbLastTapTime = 0, lbLastTapX = 0, lbLastTapY = 0;
+
+// Slepen met de muis (desktop, alleen als ingezoomd)
+let lbMouseDragActive = false;
 
 function lbApplyTransform() {
   document.getElementById('lbImg').style.transform =
     `translate(${lbPanX}px, ${lbPanY}px) scale(${lbScale})`;
 }
 
+function lbSetZoomState() {
+  document.getElementById('lbImgWrap').classList.toggle('zoomed', lbScale > 1.01);
+}
+
+function lbClampPan() {
+  const wrap = document.getElementById('lbImgWrap');
+  const img  = document.getElementById('lbImg');
+  if (!img.naturalWidth) return;
+  const rect = wrap.getBoundingClientRect();
+  const fitScale = Math.min(rect.width / img.naturalWidth, rect.height / img.naturalHeight);
+  const shownW = img.naturalWidth  * fitScale * lbScale;
+  const shownH = img.naturalHeight * fitScale * lbScale;
+  const maxPanX = Math.max(0, (shownW - rect.width)  / 2);
+  const maxPanY = Math.max(0, (shownH - rect.height) / 2);
+  lbPanX = Math.max(-maxPanX, Math.min(maxPanX, lbPanX));
+  lbPanY = Math.max(-maxPanY, Math.min(maxPanY, lbPanY));
+}
+
 function lbResetZoom() {
   lbScale = 1; lbPanX = 0; lbPanY = 0;
   lbApplyTransform();
+  lbSetZoomState();
+}
+
+// Zoomt in/uit terwijl het punt onder (clientX, clientY) op zijn plek blijft —
+// zo zoom je op desktop naar de cursor toe en op mobiel naar het pinch-/tikpunt.
+function lbZoomAt(clientX, clientY, newScale) {
+  const wrap = document.getElementById('lbImgWrap');
+  const rect = wrap.getBoundingClientRect();
+  const cx = clientX - rect.left - rect.width / 2;
+  const cy = clientY - rect.top - rect.height / 2;
+  newScale = Math.max(1, Math.min(6, newScale));
+  const factor = newScale / lbScale;
+  lbPanX = cx - (cx - lbPanX) * factor;
+  lbPanY = cy - (cy - lbPanY) * factor;
+  lbScale = newScale;
+  if (lbScale <= 1.001) { lbScale = 1; lbPanX = 0; lbPanY = 0; }
+  lbClampPan();
+  lbApplyTransform();
+  lbSetZoomState();
 }
 
 function openLightbox(workId) {
@@ -792,50 +840,121 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') lbNextImg();
 });
 
-// Touch: pinch-zoom + pan + swipe navigatie
-const lbWrap = document.querySelector('.lb-img-wrap');
+// Mobiel: pinch-zoom, pannen (ingezoomd), swipen (niet ingezoomd) en dubbeltik-zoom.
+// Desktop: scrollen/trackpad-pinch om te zoomen, slepen om te pannen als je ingezoomd bent.
+const lbWrap = document.getElementById('lbImgWrap');
 
 lbWrap.addEventListener('touchstart', e => {
-  lbActiveTouches = e.touches.length;
   if (e.touches.length === 2) {
     const dx = e.touches[1].clientX - e.touches[0].clientX;
     const dy = e.touches[1].clientY - e.touches[0].clientY;
     lbPinchStartDist  = Math.hypot(dx, dy);
     lbPinchStartScale = lbScale;
-  } else {
-    lbTouchStartX = e.touches[0].clientX;
-    lbDragStartX  = e.touches[0].clientX;
-    lbDragStartY  = e.touches[0].clientY;
-    lbPanStartX   = lbPanX;
-    lbPanStartY   = lbPanY;
+    lbDragActive = false;
+  } else if (e.touches.length === 1) {
+    lbDragActive = true;
+    lbDragMoved  = 0;
+    lbDragStartX = e.touches[0].clientX;
+    lbDragStartY = e.touches[0].clientY;
+    lbPanStartX  = lbPanX;
+    lbPanStartY  = lbPanY;
   }
 }, { passive: true });
 
 lbWrap.addEventListener('touchmove', e => {
   if (e.touches.length === 2) {
     e.preventDefault();
+    lbDragActive = false;
     const dx   = e.touches[1].clientX - e.touches[0].clientX;
     const dy   = e.touches[1].clientY - e.touches[0].clientY;
     const dist = Math.hypot(dx, dy);
-    lbScale = Math.max(1, Math.min(6, lbPinchStartScale * (dist / lbPinchStartDist)));
-    lbApplyTransform();
-  } else if (e.touches.length === 1 && lbScale > 1.05) {
-    e.preventDefault();
-    lbPanX = lbPanStartX + (e.touches[0].clientX - lbDragStartX);
-    lbPanY = lbPanStartY + (e.touches[0].clientY - lbDragStartY);
-    lbApplyTransform();
+    const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+    const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+    lbZoomAt(midX, midY, lbPinchStartScale * (dist / lbPinchStartDist));
+  } else if (e.touches.length === 1 && lbDragActive) {
+    const dx = e.touches[0].clientX - lbDragStartX;
+    const dy = e.touches[0].clientY - lbDragStartY;
+    lbDragMoved = Math.max(lbDragMoved, Math.hypot(dx, dy));
+
+    if (lbScale > 1.01) {
+      // Ingezoomd: één vinger verschuift de foto
+      e.preventDefault();
+      lbPanX = lbPanStartX + dx;
+      lbPanY = lbPanStartY + dy;
+      lbClampPan();
+      lbApplyTransform();
+    }
+    // Niet ingezoomd: swipe-afhandeling gebeurt in touchend, geen preventDefault nodig
   }
 }, { passive: false });
 
 lbWrap.addEventListener('touchend', e => {
-  if (lbScale < 1.1) lbResetZoom();
-  // Swipe voor navigatie alleen als niet ingezoomd
-  if (lbActiveTouches === 1 && lbScale <= 1.05) {
-    const diff = lbTouchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) { if (diff > 0) lbNextImg(); else lbPrevImg(); }
+  if (e.touches.length > 0) { lbDragActive = false; lbPinchStartDist = 0; return; }
+
+  if (lbDragActive) {
+    const touch = e.changedTouches[0];
+
+    if (lbDragMoved < 12) {
+      // Tik: check op dubbeltik om in/uit te zoomen
+      const now = Date.now();
+      const dx  = touch.clientX - lbLastTapX, dy = touch.clientY - lbLastTapY;
+      if (now - lbLastTapTime < 300 && Math.hypot(dx, dy) < 40) {
+        lbZoomAt(touch.clientX, touch.clientY, lbScale > 1.01 ? 1 : 2.5);
+        lbLastTapTime = 0;
+      } else {
+        lbLastTapTime = now;
+        lbLastTapX = touch.clientX;
+        lbLastTapY = touch.clientY;
+      }
+    } else if (lbScale <= 1.05) {
+      // Swipe voor volgende/vorige, alleen als niet ingezoomd
+      const diff = lbDragStartX - touch.clientX;
+      if (Math.abs(diff) > 50 && Math.abs(touch.clientY - lbDragStartY) < 80) {
+        if (diff > 0) lbNextImg(); else lbPrevImg();
+      }
+    }
   }
-  lbActiveTouches = e.touches.length;
+
+  lbDragActive = false;
+  lbPinchStartDist = 0;
 }, { passive: true });
+
+// Desktop: scrollen / trackpad-pinch om te zoomen op het cursorpunt
+lbWrap.addEventListener('wheel', e => {
+  e.preventDefault();
+  const zoomFactor = Math.exp(-e.deltaY * 0.0025);
+  lbZoomAt(e.clientX, e.clientY, lbScale * zoomFactor);
+}, { passive: false });
+
+// Desktop: slepen om te pannen zodra je ingezoomd bent
+lbWrap.addEventListener('mousedown', e => {
+  if (lbScale <= 1.01) return;
+  e.preventDefault();
+  lbMouseDragActive = true;
+  lbDragStartX = e.clientX; lbDragStartY = e.clientY;
+  lbPanStartX  = lbPanX;    lbPanStartY  = lbPanY;
+  lbWrap.classList.add('dragging');
+});
+
+window.addEventListener('mousemove', e => {
+  if (!lbMouseDragActive) return;
+  lbPanX = lbPanStartX + (e.clientX - lbDragStartX);
+  lbPanY = lbPanStartY + (e.clientY - lbDragStartY);
+  lbClampPan();
+  lbApplyTransform();
+});
+
+window.addEventListener('mouseup', () => {
+  if (lbMouseDragActive) {
+    lbMouseDragActive = false;
+    lbWrap.classList.remove('dragging');
+  }
+});
+
+// Klik op de lege ruimte rond een niet-ingezoomde foto sluit de lightbox
+lbWrap.addEventListener('click', e => {
+  if (lbScale <= 1.001 && e.target === lbWrap) closeLightbox();
+});
 
 // ─────────────────────────────────────────────────────────────
 // NAVIGATIE
