@@ -186,7 +186,28 @@ const HERO_IMAGES = {
 
 const ARTWORKS = [
   // ── 2026 ──────────────────────────────────────────────────
-  {
+    {
+    id: 'w2607',
+    year: 2026,
+    title: 'Droomstaat',
+    medium: 'ledlicht en olieverf op doek',
+    dimensions: '170 x 135cm',
+    description: '',
+    ratio: '5/3',
+    images: ['images/2026_droomstaat.jpg'],
+    thumbnail: 'images/2026_droomstaat_thumb.jpg',
+  },{
+    id: 'w2606',
+    year: 2026,
+    title: 'De vierde muur',
+    medium: 'olieverf op doek',
+    dimensions: '100 x 150 cm',
+    description: '',
+    ratio: '5/3',
+    images: ['images/2026_vierdemuur.jpg'],
+    thumbnail: 'images/2026_vierdemuur_thumb.jpg',
+  },
+   {
     id: 'w2605',
     year: 2026,
     title: 'Het breken van een herinnering',
