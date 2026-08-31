@@ -287,8 +287,12 @@ body {
   gap: 1.1rem;
 }
 
+/* Breedte-verdeling in de rij is evenredig aan de eigen beeldverhouding
+   (--ar, per werk gezet in script.js) i.p.v. gelijke breedte voor iedereen —
+   zo krijgt elke foto in de rij dezelfde hoogte en behoudt hij zijn eigen
+   verhouding voor de breedte, net als bij een klassiek fotoarchief. */
 .archive-thumb {
-  flex: 1 1 0;
+  flex: var(--ar, 1) var(--ar, 1) 0;
   min-width: 0;
   cursor: pointer;
   overflow: hidden;

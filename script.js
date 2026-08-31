@@ -320,7 +320,7 @@ const ARTWORKS = [
     thumbnail: 'images/2025_hold_b.webp',
   },
    
-  // ── 2024 ──────────────────────────────────────────────────
+  // ── 2023 ──────────────────────────────────────────────────
   {
     id: 'w2301',
     year: 2023,
@@ -331,45 +331,6 @@ const ARTWORKS = [
     ratio: '4/5',
     images: ['images/2023_hang_a.webp'],
     thumbnail: 'images/2023_hang_a.webp',
-  },
-  // ── 2023 ──────────────────────────────────────────────────
-
-  {
-    id: 'w2302',
-    year: 2023,
-    title: '',
-    medium: '',
-    dimensions: '',
-    description: '',
-    ratio: '4/5',
-    images: [''],
-    thumbnail: '',
-  },
-
-  // ── 2022 ──────────────────────────────────────────────────
-  {
-    id: 'w2201',
-    year: 2022,
-    title: '',
-    medium: '',
-    dimensions: '',
-    description: '',
-    ratio: '3/4',
-    images: ['images/2022_01_a.webp'],
-    thumbnail: 'images/2022_01_a.webp',
-  },
-
-  // ── 2021 ──────────────────────────────────────────────────
-  {
-    id: 'w2101',
-    year: 2021,
-    title: '',
-    medium: '',
-    dimensions: '100 × 100 cm',
-    description: '',
-    ratio: '1/1',
-    images: [''],
-    thumbnail: '',
   },
 ];
 
@@ -506,8 +467,12 @@ function renderStatement() {
 // ─────────────────────────────────────────────────────────────
 
 function isPortraitRatio(ratio) {
+  return ratioValue(ratio) < 1;
+}
+
+function ratioValue(ratio) {
   const [w, h] = ratio.split('/').map(Number);
-  return h > w;
+  return w / h;
 }
 
 // Verdeelt werken in rijen: liggende foto's naast elkaar (max 2 per rij),
@@ -556,6 +521,7 @@ async function renderArchive() {
 
         return `
           <div class="archive-thumb"
+               style="--ar:${ratioValue(ratio)}"
                data-work-id="${escapeHtml(work.id)}"
                role="button" tabindex="0"
                aria-label="${escapeHtml(work.title)}">
