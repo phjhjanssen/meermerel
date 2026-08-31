@@ -186,6 +186,9 @@ const HERO_IMAGES = {
 // 'row' bepaalt welke werken (binnen hetzelfde jaar) samen op één regel
 // staan: geef ze hetzelfde nummer. Volgorde binnen de regel volgt de
 // volgorde in deze lijst. Een werk zonder 'row' krijgt een eigen regel.
+// 'rowWidth' (optioneel, percentage) maakt een hele regel kleiner i.p.v.
+// hem de volle breedte te laten vullen — handig als een regel met maar
+// 1 of 2 werken er anders te groot uitziet. Zet 'm op één werk in de rij.
 
 const ARTWORKS = [
   // ── 2026 ──────────────────────────────────────────────────
@@ -314,6 +317,7 @@ const ARTWORKS = [
     id: 'w2503',
     year: 2025,
     row: 2,
+    rowWidth: 83,
     title: 'Care',
     medium: 'keramiek, metaal en steen',
     dimensions: '127 x 12 x 14 cm',
@@ -538,7 +542,10 @@ async function renderArchive() {
           </div>`;
       }).join('');
 
-      return `<div class="archive-row">${thumbs}</div>`;
+      const rowWidth = row.map(w => w.rowWidth).find(w => w !== undefined);
+      const rowStyle = rowWidth ? ` style="max-width:${rowWidth}%"` : '';
+
+      return `<div class="archive-row"${rowStyle}>${thumbs}</div>`;
     }).join('');
 
     return `
@@ -949,8 +956,11 @@ lbWrap.addEventListener('touchend', e => {
   lbPinchStartDist = 0;
 }, { passive: true });
 
-// Desktop: scrollen / trackpad-pinch om te zoomen op het cursorpunt
+// Desktop: trackpad-pinch (of ctrl+scrollwiel) zoomt op het cursorpunt.
+// Gewoon scrollen (geen ctrlKey) laat de browser gewoon de pagina scrollen —
+// anders kun je niet meer naar de tekst onder de foto scrollen.
 lbWrap.addEventListener('wheel', e => {
+  if (!e.ctrlKey) return;
   e.preventDefault();
   const zoomFactor = Math.exp(-e.deltaY * 0.0025);
   lbZoomAt(e.clientX, e.clientY, lbScale * zoomFactor);

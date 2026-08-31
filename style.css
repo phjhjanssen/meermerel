@@ -522,13 +522,15 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
 .lb-next { right: 0.5rem; }
 .lb-arrow.hidden { visibility: hidden; pointer-events: none; }
 
-/* Foto vult het scherm bij openen; zoom/pan gebeurt via een JS-transform
-   op .lb-img. De tekst staat erna in de normale pagina-flow (zie
-   .lb-info-bar) — scroll naar beneden om die te lezen. */
+/* Foto vult vrijwel het scherm bij openen — iets minder dan 100dvh, zodat
+   de titel er al onder in beeld piept zonder te hoeven scrollen. De rest
+   van de tekst (materiaal, beschrijving) staat in de normale pagina-flow
+   (zie .lb-info-bar); daarvoor scroll je verder naar beneden. Zoom/pan
+   gebeurt via een JS-transform op .lb-img. */
 .lb-stage {
   position: relative;
-  height: 100dvh;
-  min-height: 420px;
+  height: calc(100dvh - 88px);
+  min-height: 360px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -636,9 +638,21 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
 
   .nav-links a::after { display: none; }
 
-  /* Archief grid */
+  /* Archief grid — op mobiel altijd één werk per regel, volle breedte:
+     de rij-indeling (en eventuele rowWidth) is bedoeld voor desktop en
+     maakt thumbnails op een telefoon te klein. */
   .archive-grid { gap: 0.75rem; }
-  .archive-row { gap: 0.75rem; }
+  .archive-row {
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: none !important;
+  }
+  .archive-row .archive-thumb,
+  .archive-row .archive-thumb:only-child {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+  }
 
   /* Agenda */
   .agenda-item { grid-template-columns: 1fr; gap: 0.3rem; }
@@ -648,6 +662,7 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
   .cv-table td:first-child { width: 65px; padding-right: 0.9rem; }
 
   /* Lightbox */
+  .lb-stage { height: calc(100dvh - 76px); }
   .lb-info-bar { padding: 2rem 1.25rem 3rem; }
   .lb-arrow { display: none; }
 }
