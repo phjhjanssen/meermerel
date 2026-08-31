@@ -471,12 +471,21 @@ function isRealImage(src) {
 
 function loadImage(el, src, ratio, label) {
   if (!isRealImage(src)) {
+    el.style.aspectRatio = ratio;
     el.src = svgPlaceholder(ratio, label);
     return;
   }
   const img = new Image();
-  img.onload  = () => { el.src = src; };
-  img.onerror = () => { el.src = svgPlaceholder(ratio, label); };
+  img.onload  = () => {
+    // Echte beeldverhouding van de foto zelf, niet het (vaak onnauwkeurige)
+    // handmatig ingevulde 'ratio'-veld — zo klopt het thumbnail-vak altijd.
+    el.style.aspectRatio = `${img.naturalWidth} / ${img.naturalHeight}`;
+    el.src = src;
+  };
+  img.onerror = () => {
+    el.style.aspectRatio = ratio;
+    el.src = svgPlaceholder(ratio, label);
+  };
   img.src = src;
 }
 
@@ -516,6 +525,7 @@ function renderArchive() {
              role="button" tabindex="0"
              aria-label="${escapeHtml(work.title)}">
           <img class="archive-thumb-img"
+               style="aspect-ratio:${escapeHtml(work.ratio)}"
                src="${escapeHtml(svgPlaceholder(work.ratio, work.title))}"
                alt="${escapeHtml(work.title)}">
           ${dots}

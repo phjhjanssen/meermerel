@@ -275,6 +275,7 @@ body {
 .archive-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  align-items: start;
   gap: 1.1rem;
 }
 
@@ -284,11 +285,13 @@ body {
   position: relative;
 }
 
+/* aspect-ratio wordt per werk inline gezet (zie script.js), zodat een
+   liggende foto een breed vak krijgt en een staande foto een smal vak —
+   nooit uitgesneden. */
 .archive-thumb-img {
   width: 100%;
-  aspect-ratio: 2/3;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.45s ease;
 }
 
