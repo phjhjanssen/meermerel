@@ -243,10 +243,10 @@ const ARTWORKS = [
    {
     id: 'w2601',
     year: 2026,
-    title: '(Inhoud tussen haakjes) samenwerking met Marijke Bot', 
+    title: '(Inhoud tussen haakjes)', 
     medium: 'houtskool, verf van uischillen en draad op canvas',
     dimensions: '17 x 27 x 6,5 m',
-    description: '',
+    description: 'samenwerking met Marijke Bot',
     ratio: '3/4',
     images: ['images/2026_de fabriek_a.webp','images/2026_de fabriek_b.webp','images/2026_de fabriek_c.webp','images/2026_de fabriek_d.webp','images/2026_de fabriek_e.webp','images/2026_de fabriek_f.webp'],
     thumbnail: 'images/2026_de fabriek_a.webp',
@@ -262,7 +262,7 @@ const ARTWORKS = [
     description: '',
     ratio: '4/3',
     images: ['images/2025_who wants to be_a.webp'],
-    thumbnail: 'images/2025_who wants to be_thumb.webp',
+    thumbnail: 'images/2026_girls.jpg',
   },
    {
     id: 'w2501',
@@ -284,7 +284,7 @@ const ARTWORKS = [
     description: '',
     ratio: '4/5',
     images: ['images/2025_pak liever een emmer_a.webp'],
-    thumbnail: 'images/2025_pak liever een emmer_thumb.webp',
+    thumbnail: 'images/2026_emmer.jpg',
   },
      {
     id: 'w2502',
