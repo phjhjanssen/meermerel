@@ -183,12 +183,16 @@ const HERO_IMAGES = {
 // ─────────────────────────────────────────────────────────────
 // WERKEN IN HET ARCHIEF
 // ─────────────────────────────────────────────────────────────
+// 'row' bepaalt welke werken (binnen hetzelfde jaar) samen op één regel
+// staan: geef ze hetzelfde nummer. Volgorde binnen de regel volgt de
+// volgorde in deze lijst. Een werk zonder 'row' krijgt een eigen regel.
 
 const ARTWORKS = [
   // ── 2026 ──────────────────────────────────────────────────
     {
     id: 'w2607',
     year: 2026,
+    row: 1,
     title: 'Droomstaat',
     medium: 'ledlicht en olieverf op doek',
     dimensions: '170 x 135cm',
@@ -199,6 +203,7 @@ const ARTWORKS = [
   },{
     id: 'w2606',
     year: 2026,
+    row: 1,
     title: 'De vierde muur',
     medium: 'olieverf op doek',
     dimensions: '100 x 150 cm',
@@ -210,6 +215,7 @@ const ARTWORKS = [
    {
     id: 'w2605',
     year: 2026,
+    row: 2,
     title: 'Het breken van een herinnering',
     medium: 'ledlicht en olieverf op doek',
     dimensions: '60 x 150 cm',
@@ -221,6 +227,7 @@ const ARTWORKS = [
    {
     id: 'w2604',
     year: 2026,
+    row: 2,
     title: 'Een zee van mensen',
     medium: 'olieverf op doek',
     dimensions: '150 x 325 cm',
@@ -232,6 +239,7 @@ const ARTWORKS = [
    {
     id: 'w2603',
     year: 2026,
+    row: 3,
     title: 'Kickbacks',
     medium: 'keramiek en metaal',
     dimensions: '325 x 70 cm',
@@ -243,7 +251,8 @@ const ARTWORKS = [
    {
     id: 'w2601',
     year: 2026,
-    title: '(Inhoud tussen haakjes)', 
+    row: 3,
+    title: '(Inhoud tussen haakjes)',
     medium: 'houtskool, verf van uischillen en draad op canvas',
     dimensions: '17 x 27 x 6,5 m',
     description: 'samenwerking met Marijke Bot',
@@ -256,6 +265,7 @@ const ARTWORKS = [
   {
     id: 'w2402',
     year: 2025,
+    row: 1,
     title: 'Who wants to be like all the girls?',
     medium: 'olieverf op doek',
     dimensions: '128 x 90 cm',
@@ -267,6 +277,7 @@ const ARTWORKS = [
    {
     id: 'w2501',
     year: 2025,
+    row: 1,
     title: 'De confrontatie',
     medium: 'Olieverf op doek',
     dimensions: '128 x 90 cm',
@@ -278,6 +289,7 @@ const ARTWORKS = [
      {
     id: 'w2401',
     year: 2025,
+    row: 1,
     title: '"Pak liever een emmer"',
     medium: 'Olieverf op doek',
     dimensions: '128 x 90 cm',
@@ -289,6 +301,7 @@ const ARTWORKS = [
      {
     id: 'w2502',
     year: 2025,
+    row: 2,
     title: '"I, Fall, Apart"',
     medium: 'Olieverf op doek',
     dimensions: '90 x 160 cm',
@@ -300,6 +313,7 @@ const ARTWORKS = [
       {
     id: 'w2503',
     year: 2025,
+    row: 2,
     title: 'Care',
     medium: 'keramiek, metaal en steen',
     dimensions: '127 x 12 x 14 cm',
@@ -311,6 +325,7 @@ const ARTWORKS = [
       {
     id: 'w2504',
     year: 2025,
+    row: 3,
     title: 'Hold',
     medium: 'keramiek',
     dimensions: '10 x 25 x 16 cm',
@@ -324,6 +339,7 @@ const ARTWORKS = [
   {
     id: 'w2301',
     year: 2023,
+    row: 1,
     title: '"Hang in there"',
     medium: 'Acrylverf op doek',
     dimensions: '23 x 15 cm',
@@ -466,53 +482,39 @@ function renderStatement() {
 // RENDER: ARCHIEF
 // ─────────────────────────────────────────────────────────────
 
-function isPortraitRatio(ratio) {
-  return ratioValue(ratio) < 1;
-}
-
 function ratioValue(ratio) {
   const [w, h] = ratio.split('/').map(Number);
   return w / h;
 }
 
-// Verdeelt werken in rijen: liggende foto's naast elkaar (max 2 per rij),
-// staande foto's naast elkaar (max 3 per rij), een mix van beide (max 2 per rij).
-// 'ratios' is een Map van work.id naar de opgeloste (echte) beeldverhouding.
-function groupIntoRows(works, ratios) {
-  const rows = [];
-  let row = [];
+// Verdeelt werken in rijen op basis van het handmatige 'row'-veld (zie
+// ARTWORKS hierboven) — werken met hetzelfde 'row'-nummer (binnen hetzelfde
+// jaar) komen samen op één regel. Een werk zonder 'row' krijgt een eigen regel.
+function groupIntoRows(works) {
+  const rowMap = new Map();
 
   works.forEach(work => {
-    const trial = [...row, work];
-    const portraitCount = trial.filter(w => isPortraitRatio(ratios.get(w.id))).length;
-    const allPortrait = portraitCount === trial.length;
-    const cap = allPortrait ? 3 : 2;
-
-    if (trial.length <= cap) {
-      row = trial;
-    } else {
-      rows.push(row);
-      row = [work];
-    }
+    const key = work.row !== undefined ? work.row : `_solo_${work.id}`;
+    if (!rowMap.has(key)) rowMap.set(key, []);
+    rowMap.get(key).push(work);
   });
-  if (row.length) rows.push(row);
 
-  return rows;
+  return [...rowMap.values()];
 }
 
 async function renderArchive() {
   const container = document.getElementById('archiveContent');
   const years = [...new Set(ARTWORKS.map(a => a.year))].sort((a, b) => b - a);
 
-  // Eerst de echte beeldverhouding van elk werk ophalen — nodig om zowel
-  // het thumbnail-vak als de rij-indeling hierboven te laten kloppen met
-  // de foto zelf, i.p.v. het handmatige (en soms onnauwkeurige) 'ratio'-veld.
+  // Eerst de echte beeldverhouding van elk werk ophalen — nodig om het
+  // thumbnail-vak te laten kloppen met de foto zelf, i.p.v. het handmatige
+  // (en soms onnauwkeurige) 'ratio'-veld.
   const ratios = new Map();
   await Promise.all(ARTWORKS.map(work => resolveRatio(work).then(r => ratios.set(work.id, r))));
 
   container.innerHTML = years.map(year => {
     const works = ARTWORKS.filter(w => w.year === year);
-    const rows = groupIntoRows(works, ratios);
+    const rows = groupIntoRows(works);
 
     const rowsHtml = rows.map(row => {
       const thumbs = row.map(work => {

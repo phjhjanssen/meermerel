@@ -287,6 +287,14 @@ body {
   gap: 1.1rem;
 }
 
+/* Een werk dat alleen (zonder rijgenoot) staat — bv. het enige werk van een
+   jaar — krijgt niet de volle rijbreedte, anders wordt het onevenredig
+   groot t.o.v. de andere rijen. Zelfde breedte-aandeel als in een rij van 3. */
+.archive-row .archive-thumb:only-child {
+  flex: 0 0 33.333%;
+  max-width: 33.333%;
+}
+
 /* Breedte-verdeling in de rij is evenredig aan de eigen beeldverhouding
    (--ar, per werk gezet in script.js) i.p.v. gelijke breedte voor iedereen —
    zo krijgt elke foto in de rij dezelfde hoogte en behoudt hij zijn eigen
@@ -342,6 +350,7 @@ body {
   display: block;
   font-size: 0.8rem;
   font-weight: 300;
+  font-style: italic;
   letter-spacing: 0.03em;
   color: var(--text);
 }
@@ -477,7 +486,8 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
   inset: 0;
   background: rgba(245, 244, 242, 0.97);
   z-index: 300;
-  overflow: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .lightbox.open {
   display: block;
@@ -512,10 +522,13 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
 .lb-next { right: 0.5rem; }
 .lb-arrow.hidden { visibility: hidden; pointer-events: none; }
 
-/* Foto vult het scherm; zoom/pan gebeurt via een JS-transform op .lb-img */
+/* Foto vult het scherm bij openen; zoom/pan gebeurt via een JS-transform
+   op .lb-img. De tekst staat erna in de normale pagina-flow (zie
+   .lb-info-bar) — scroll naar beneden om die te lezen. */
 .lb-stage {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  height: 100dvh;
+  min-height: 420px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -547,17 +560,13 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
   user-select: none;
 }
 
-/* Titel/materiaal — compacte overlay onderin, staat niet in de weg van de foto */
+/* Titel/materiaal staan ONDER de foto (gewone pagina-flow), niet als waas
+   erover — de bezoeker scrollt naar beneden voor de volledige tekst. */
 .lb-info-bar {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  padding: 2.5rem var(--pad-x) 1.4rem;
-  background: linear-gradient(to top, rgba(245, 244, 242, 0.92), rgba(245, 244, 242, 0));
+  padding: 2.5rem var(--pad-x) 4rem;
   text-align: center;
-  pointer-events: none;
-  z-index: 305;
 }
-.lb-title { font-size: 0.9rem; font-weight: 300; letter-spacing: 0.03em; margin-bottom: 0.25rem; }
+.lb-title { font-size: 0.9rem; font-weight: 300; font-style: italic; letter-spacing: 0.03em; margin-bottom: 0.25rem; }
 .lb-meta  { font-size: 0.74rem; color: var(--text-mid); }
 .lb-desc  { font-size: 0.8rem; line-height: 1.6; margin-top: 0.35rem; max-width: 500px; margin-left: auto; margin-right: auto; }
 .lb-desc:empty { display: none; }
@@ -639,6 +648,6 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
   .cv-table td:first-child { width: 65px; padding-right: 0.9rem; }
 
   /* Lightbox */
-  .lb-info-bar { padding: 2rem 1.25rem 1.1rem; }
+  .lb-info-bar { padding: 2rem 1.25rem 3rem; }
   .lb-arrow { display: none; }
 }
