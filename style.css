@@ -529,7 +529,7 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
    gebeurt via een JS-transform op .lb-img. */
 .lb-stage {
   position: relative;
-  height: calc(100dvh - 88px);
+  height: calc(100dvh - 52px);
   min-height: 360px;
   display: flex;
   align-items: center;
@@ -565,7 +565,7 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
 /* Titel/materiaal staan ONDER de foto (gewone pagina-flow), niet als waas
    erover — de bezoeker scrollt naar beneden voor de volledige tekst. */
 .lb-info-bar {
-  padding: 2.5rem var(--pad-x) 4rem;
+  padding: 0.75rem var(--pad-x) 4rem;
   text-align: center;
 }
 .lb-title { font-size: 0.9rem; font-weight: 300; font-style: italic; letter-spacing: 0.03em; margin-bottom: 0.25rem; }
@@ -662,7 +662,7 @@ footer p { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mid); }
   .cv-table td:first-child { width: 65px; padding-right: 0.9rem; }
 
   /* Lightbox */
-  .lb-stage { height: calc(100dvh - 76px); }
-  .lb-info-bar { padding: 2rem 1.25rem 3rem; }
+  .lb-stage { height: calc(100dvh - 46px); }
+  .lb-info-bar { padding: 0.6rem 1.25rem 3rem; }
   .lb-arrow { display: none; }
 }
