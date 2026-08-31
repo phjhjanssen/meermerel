@@ -469,24 +469,20 @@ function isRealImage(src) {
   return src && !src.startsWith('data:');
 }
 
-function loadImage(el, src, ratio, label) {
-  if (!isRealImage(src)) {
-    el.style.aspectRatio = ratio;
-    el.src = svgPlaceholder(ratio, label);
-    return;
-  }
-  const img = new Image();
-  img.onload  = () => {
-    // Echte beeldverhouding van de foto zelf, niet het (vaak onnauwkeurige)
-    // handmatig ingevulde 'ratio'-veld — zo klopt het thumbnail-vak altijd.
-    el.style.aspectRatio = `${img.naturalWidth} / ${img.naturalHeight}`;
-    el.src = src;
-  };
-  img.onerror = () => {
-    el.style.aspectRatio = ratio;
-    el.src = svgPlaceholder(ratio, label);
-  };
-  img.src = src;
+// Achterhaalt de werkelijke beeldverhouding van een werk door de thumbnail
+// te laden — valt terug op het handmatige 'ratio'-veld als er geen echte
+// foto is (of die niet laadt). Wordt gebruikt vóórdat het archief gebouwd
+// wordt, zodat zowel het thumbnail-vak als de rij-indeling (zie
+// groupIntoRows) altijd kloppen met de foto zelf.
+function resolveRatio(work) {
+  const src = work.thumbnail || work.images[0];
+  if (!isRealImage(src)) return Promise.resolve(work.ratio);
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload  = () => resolve(`${img.naturalWidth} / ${img.naturalHeight}`);
+    img.onerror = () => resolve(work.ratio);
+    img.src = src;
+  });
 }
 
 function escapeHtml(str) {
@@ -509,50 +505,85 @@ function renderStatement() {
 // RENDER: ARCHIEF
 // ─────────────────────────────────────────────────────────────
 
-function renderArchive() {
+function isPortraitRatio(ratio) {
+  const [w, h] = ratio.split('/').map(Number);
+  return h > w;
+}
+
+// Verdeelt werken in rijen: liggende foto's naast elkaar (max 2 per rij),
+// staande foto's naast elkaar (max 3 per rij), een mix van beide (max 2 per rij).
+// 'ratios' is een Map van work.id naar de opgeloste (echte) beeldverhouding.
+function groupIntoRows(works, ratios) {
+  const rows = [];
+  let row = [];
+
+  works.forEach(work => {
+    const trial = [...row, work];
+    const portraitCount = trial.filter(w => isPortraitRatio(ratios.get(w.id))).length;
+    const allPortrait = portraitCount === trial.length;
+    const cap = allPortrait ? 3 : 2;
+
+    if (trial.length <= cap) {
+      row = trial;
+    } else {
+      rows.push(row);
+      row = [work];
+    }
+  });
+  if (row.length) rows.push(row);
+
+  return rows;
+}
+
+async function renderArchive() {
   const container = document.getElementById('archiveContent');
   const years = [...new Set(ARTWORKS.map(a => a.year))].sort((a, b) => b - a);
 
+  // Eerst de echte beeldverhouding van elk werk ophalen — nodig om zowel
+  // het thumbnail-vak als de rij-indeling hierboven te laten kloppen met
+  // de foto zelf, i.p.v. het handmatige (en soms onnauwkeurige) 'ratio'-veld.
+  const ratios = new Map();
+  await Promise.all(ARTWORKS.map(work => resolveRatio(work).then(r => ratios.set(work.id, r))));
+
   container.innerHTML = years.map(year => {
     const works = ARTWORKS.filter(w => w.year === year);
+    const rows = groupIntoRows(works, ratios);
 
-    const thumbs = works.map(work => {
-      const dots = '';
+    const rowsHtml = rows.map(row => {
+      const thumbs = row.map(work => {
+        const ratio = ratios.get(work.id);
+        const src = work.thumbnail || work.images[0];
 
-      return `
-        <div class="archive-thumb"
-             data-work-id="${escapeHtml(work.id)}"
-             role="button" tabindex="0"
-             aria-label="${escapeHtml(work.title)}">
-          <img class="archive-thumb-img"
-               style="aspect-ratio:${escapeHtml(work.ratio)}"
-               src="${escapeHtml(svgPlaceholder(work.ratio, work.title))}"
-               alt="${escapeHtml(work.title)}">
-          ${dots}
-          <div class="archive-thumb-caption">
-            <span class="archive-thumb-title">${escapeHtml(work.title)}</span>
-            <span class="archive-thumb-meta">${escapeHtml(work.medium)}</span>
-          </div>
-        </div>`;
+        return `
+          <div class="archive-thumb"
+               data-work-id="${escapeHtml(work.id)}"
+               role="button" tabindex="0"
+               aria-label="${escapeHtml(work.title)}">
+            <img class="archive-thumb-img"
+                 style="aspect-ratio:${escapeHtml(ratio)}"
+                 src="${escapeHtml(isRealImage(src) ? src : svgPlaceholder(ratio, work.title))}"
+                 alt="${escapeHtml(work.title)}">
+            <div class="archive-thumb-caption">
+              <span class="archive-thumb-title">${escapeHtml(work.title)}</span>
+              <span class="archive-thumb-meta">${escapeHtml(work.medium)}</span>
+            </div>
+          </div>`;
+      }).join('');
+
+      return `<div class="archive-row">${thumbs}</div>`;
     }).join('');
 
     return `
       <div class="archive-year">
         <h3 class="archive-year-heading">${year}</h3>
-        <div class="archive-grid">${thumbs}</div>
+        <div class="archive-grid">${rowsHtml}</div>
       </div>`;
   }).join('');
 
-  // Afbeeldingen laden en interactie koppelen
+  // Lightbox koppelen
   container.querySelectorAll('.archive-thumb').forEach(el => {
     const work = ARTWORKS.find(w => w.id === el.dataset.workId);
     if (!work) return;
-    const imgEl = el.querySelector('.archive-thumb-img');
-
-    // Thumbnail laden
-    loadImage(imgEl, work.thumbnail || work.images[0], work.ratio, work.title);
-
-    // Lightbox openen
     const open = () => openLightbox(work.id);
     el.addEventListener('click', open);
     el.addEventListener('keydown', e => {
