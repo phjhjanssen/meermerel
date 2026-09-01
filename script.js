@@ -364,23 +364,28 @@ const CV_DATA = {
     { key: 'lives', value: 'Nijmegen, Nederland' },
   ],
   education: [
-    ['2022–2026', 'BA Art & Research, St. Joost, \'s-Hertogenbosch'],
+    ['2022–2026', 'BA Beeldende Kunst, St. Joost, \'s-Hertogenbosch'],
     ['2024–2025', 'Minor Kunstgeschiedenis, Radboud Universiteit, Nijmegen'],
     ['2018',      'Brede basisopleiding, HKU, Utrecht'],
   ],
   residencies: [
-    ['2026', 'Inhoud tussen haakjes, De Fabriek, Eindhoven'],
+    ['2026', '(Inhoud tussen haakjes), De Fabriek, Eindhoven'],
     ['2025', 'Om water naar de zee te dragen, Viervaart, Zeeland'],
     ['2024', 'On/af, Lokaal0.62, \'s-Hertogenbosch'],
   ],
   exhibitions: [
-    ['2026', 'Inhoud tussen haakjes, afsluiting werkperiode De Fabriek'],
+     ['2026', 'ArtiBosch,‘s-Hertogenbosch'],
+['2026', 'kunstenfestival Loosbroek, Loosbroek'],
     ['2026', 'De afstand met je handen meten, Graduation show St. Joost'],
+     ['2026', '(Inhoud tussen haakjes), afsluiting werkperiode De Fabriek'],
     ['2025', 'Om water naar de zee te dragen, afsluiting werkperiode Viervaart, St. Joost'],
     ['2024', 'On/af, Lokaal0.62'],
     ['2022', 'Groot, groter, grootst, tentoonstelling St. Joost'],
   ],
   collections: [
+     ['2026', 'Private collecties, Nederland'],
+   ['2026', 'Private collecties, Nederland'],
+     ['2026', 'Private collecties, Nederland'],
     ['2025', 'Private collecties, Nederland'],
     ['2019', 'Private collecties, Nederland'],
   ],
@@ -392,6 +397,7 @@ const CV_DATA = {
   ],
   other: [
     ['2025–2026', 'Vrijwilliger Platform P-OST'],
+     ['2026', 'Genomineerde Apresa/Troostwijk Kunstprijs'],
   ],
 };
 
@@ -412,16 +418,16 @@ const CONTACT_DATA = [
 const AGENDA_DATA = {
   current: [
     {
-      title:    '"NOW SHOW"',
-      location: 'St. Joost School of Art & Design, s-Hertogenbosch',
-      date:     '2-5 juli, 2026',
+      title:    'ArtiBosch Kunstmarkt',
+      location: 'Parade, s-Hertogenbosch',
+      date:     '06-09-2026',
     },
   ],
   upcoming: [
     {
-      title:    '"De afstand met je handen meten"',
-      location: 'St. Joost School of Art & Design, s-Hertogenbosch',
-      date:     '2-5 juli, 2026',
+      title:    'ArtiBosch Kunstmarkt',
+      location: 'Parade, s-Hertogenbosch',
+      date:     '06-09-2026',
     },
   ],
 };
