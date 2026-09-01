@@ -420,7 +420,9 @@ const AGENDA_DATA = {
       title:    'ArtiBosch Kunstmarkt',
       location: 'Parade, s-Hertogenbosch',
       date:     '06-09-2026',
-       title:    'Uitreiking Apresa/Troostwijk Kunstprijs',
+    },
+     { 
+   title:    'Uitreiking Apresa/Troostwijk Kunstprijs',
       location: ' Amsterdam',
       date:     '28-10-2026',
     },
@@ -428,7 +430,7 @@ const AGENDA_DATA = {
   upcoming: [
     {
       title:    'ArtiBosch Kunstmarkt',
-      location: 'Parade, s-Hertogenbosch',
+      location: 'Parade,s-Hertogenbosch',
       date:     '06-09-2026',
     },
   ],
