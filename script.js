@@ -397,7 +397,6 @@ const CV_DATA = {
   ],
   other: [
     ['2025–2026', 'Vrijwilliger Platform P-OST'],
-     ['2026', 'Genomineerde Apresa/Troostwijk Kunstprijs'],
   ],
 };
 
@@ -421,6 +420,9 @@ const AGENDA_DATA = {
       title:    'ArtiBosch Kunstmarkt',
       location: 'Parade, s-Hertogenbosch',
       date:     '06-09-2026',
+       title:    'Uitreiking Apresa/Troostwijk Kunstprijs',
+      location: ' Amsterdam',
+      date:     '28-10-2026',
     },
   ],
   upcoming: [
