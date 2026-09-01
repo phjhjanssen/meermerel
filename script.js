@@ -212,7 +212,7 @@ const ARTWORKS = [
     dimensions: '100 x 150 cm',
     description: '',
     ratio: '5/3',
-    images: ['images/2026_vierdemuur.jpg'],
+    images: ['images/2026_vierdemuur.jpg'], ['images/2026_vierdemuur_B.jpg'],
     thumbnail: 'images/2026_vierdemuur_thumb.jpg',
   },
    {
