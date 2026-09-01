@@ -237,7 +237,7 @@ const ARTWORKS = [
     description: '',
     ratio: '5/3',
     images: ['images/2026_een zee_a.webp','images/2026_een zee_d.webp'],
-    thumbnail: 'images/2026_een zee_c.webp',
+    thumbnail: 'images/2026_zee_thumbnail.jpg',
   }, 
    {
     id: 'w2603',
