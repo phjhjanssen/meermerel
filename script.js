@@ -287,7 +287,7 @@ const ARTWORKS = [
     description: '',
     ratio: '4/5',
     images: ['images/2025_de confrontatie_a.webp'],
-    thumbnail: 'images/2025_de confrontatie_thumb.webp',
+    thumbnail: 'images/2025_confrontatie_thumbnail.jpg',
   },
      {
     id: 'w2401',
